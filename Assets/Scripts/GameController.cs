@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
@@ -16,23 +14,43 @@ public class GameController : MonoBehaviour
     private RocketController rocketController;
     private BlackHoleController blackHoleController;
 
-    private Rigidbody2D rocketRigidbody;
+    public bool inPlay;
 
     // Start is called before the first frame update
     void Start()
     {
+        inPlay = true;
+
         blackHoleGObject = Instantiate(blackHolePrefab);
         blackHoleController = blackHoleGObject.GetComponent<BlackHoleController>();
+        blackHoleController.gameController = this;
 
         rocketGObject = Instantiate(rocketPrefab, rocketStartingPosition, Quaternion.Euler(0, 0, 0));
         rocketController = rocketGObject.GetComponent<RocketController>();
-        rocketRigidbody = rocketGObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Do nothing if not in play
+        if (!inPlay) return;
+
         var force = blackHoleController.GetGravitationalForce(rocketGObject);
-        rocketRigidbody.AddForce(force);
+        rocketController.ApplyGravitationalForce(force);
+    }
+
+    public void ObjectDied(GameObject thing)
+    {
+        if (thing.tag == "Player")
+        {
+            GameOver();
+        }
+        Destroy(thing);
+    }
+
+    void GameOver()
+    {
+        inPlay = false;
+        Debug.Log("Game Over!");
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
@@ -16,6 +14,7 @@ public class RocketController : MonoBehaviour
         rigidbody = transform.GetComponent<Rigidbody2D>();
 
         ////// FOR TESTING ONLY ///////
+        // Gives initial speed
         rigidbody.velocity = new Vector2(10, -10);
         //////////////////////////////
     }
@@ -25,14 +24,25 @@ public class RocketController : MonoBehaviour
     {
         var spriteTransform = transform.GetChild(0).transform;
         var spriteRot = spriteTransform.rotation;
-
-        var zRotDegrees = Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x) * 180 / Mathf.PI;
+        
+        var zRotDegrees = Mathf.Rad2Deg * Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x);
 
         spriteRot.eulerAngles = new Vector3(0, 0, zRotDegrees + zAngleOffset);
         spriteTransform.rotation = spriteRot;
 
         ///// FOR TESTING ONLY /////
-        Debug.DrawLine(transform.position, ((Vector2) transform.position) + rigidbody.velocity * 10, Color.green);
+        // Adds line from rocket representing velocity
+        Debug.DrawLine(transform.position, ((Vector2) transform.position) + rigidbody.velocity * 3, Color.green);
         ///////////////////////////
+    }
+
+    public void ApplyGravitationalForce(Vector2 force)
+    {
+        rigidbody.AddForce(force);
+    }
+
+    public void AddRelativiticStretch(Vector3 scale)
+    {
+        transform.localScale = scale;
     }
 }

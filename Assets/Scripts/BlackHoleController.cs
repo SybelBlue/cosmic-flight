@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BlackHoleController : MonoBehaviour
 {
 
     public float massCoefficient;
+
+    public GameController gameController;
 
     public Vector3 GetGravitationalForce(GameObject rocket)
     {
@@ -14,5 +14,11 @@ public class BlackHoleController : MonoBehaviour
         r.Normalize();
         r.Scale(massCoefficient / r.sqrMagnitude * Vector3.one);
         return r;
+    }
+
+    // Destroy everything that enters the trigger
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        gameController.ObjectDied(collider.gameObject);
     }
 }
