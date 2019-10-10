@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 4500021571792006262}
-  zAngleOffset: -121
+  zAngleOffset: -48
 --- !u!1 &4500021571792006262
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +153,7 @@ SpriteRenderer:
   m_SortingLayerID: -1554268507
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 93a6eb2fd38c921439d7d945e9a66971, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d38755875a613e24698e393a06c9a892, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

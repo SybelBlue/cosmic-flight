@@ -310,6 +310,7 @@ MonoBehaviour:
     type: 3}
   rocketGObject: {fileID: 0}
   blackHoleGObject: {fileID: 0}
+  inPlay: 0
 --- !u!4 &2119872603
 Transform:
   m_ObjectHideFlags: 0
