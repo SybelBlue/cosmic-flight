@@ -119,5 +119,7 @@ public class InputController : MonoBehaviour
     {
         gesturePower = (int)Mathf.Clamp(gestureDelta.y / unitsYPerPower + 2, 0, 3);
         gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * gestureDelta.x, -180, 180);
+
+        game.AimRocketAtAngle(gestureZAngleOffset);
     }
 }
