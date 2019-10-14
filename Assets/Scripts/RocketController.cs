@@ -45,4 +45,16 @@ public class RocketController : MonoBehaviour
     {
         transform.localScale = scale;
     }
+
+    public void AimAtAngle(float angle) 
+    {
+        var rigidbodyTransform = transform;
+        var rigidbodyRot = rigidbodyTransform.rotation;
+
+        var rigidbodyDeg = Mathf.Rad2Deg * Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x);
+
+        rigidbodyRot.eulerAngles = new Vector3(0, 0, rigidbodyDeg + angle);
+        rigidbodyTransform.rotation = rigidbodyRot;
+
+    }
 }
