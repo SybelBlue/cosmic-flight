@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
@@ -65,5 +66,10 @@ public class GameController : MonoBehaviour
         Debug.Log("Fire! pow:" + power + ", angle:" + angle);
         inPlay = true; // starts gravity
         // more shooting logic here
+    }
+
+    internal void AimRocketAtAngle(float angle)
+    {
+        rocketController.AimAtAngle(angle);
     }
 }
