@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inPlay = true;
+        inPlay = false;
 
         blackHoleGObject = Instantiate(blackHolePrefab);
         blackHoleController = blackHoleGObject.GetComponent<BlackHoleController>();
@@ -52,5 +52,18 @@ public class GameController : MonoBehaviour
     {
         inPlay = false;
         Debug.Log("Game Over!");
+    }
+
+    public Vector3 GetRocketPosition()
+    {
+        return rocketGObject.transform.position;
+    }
+
+    public void Shoot(float angle, int power) //add angle and power params?
+    {
+
+        Debug.Log("Fire! pow:" + power + ", angle:" + angle);
+        inPlay = true; // starts gravity
+        // more shooting logic here
     }
 }
