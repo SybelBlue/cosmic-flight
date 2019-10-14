@@ -15,7 +15,7 @@ public class RocketController : MonoBehaviour
 
         ////// FOR TESTING ONLY ///////
         // Gives initial speed
-        rigidbody.velocity = new Vector2(10, -10);
+        // rigidbody.velocity = new Vector2(10, -10);
         //////////////////////////////
     }
 
