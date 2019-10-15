@@ -72,4 +72,9 @@ public class GameController : MonoBehaviour
     {
         rocketController.AimAtAngle(angle);
     }
+
+    internal float GetOverlayCanvasWidth()
+    {
+        throw new NotImplementedException();
+    }
 }

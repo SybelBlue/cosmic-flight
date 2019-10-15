@@ -1,11 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class InputController : MonoBehaviour
 {
 
     public GameController game;
+
+    public GameObject statsGObject;
+    private Text statsText;
 
     public TouchPhase currentPhase;
 
@@ -80,7 +82,7 @@ public class InputController : MonoBehaviour
         currentPhase = TouchPhase.Began;
         gestureStartPosition = startPosition;
 
-        UpdateGestureProperties();
+        UpdateGestureProperties(startPosition);
     }
 
     void OnControlDrag(Vector3 currentPosition)
@@ -89,7 +91,7 @@ public class InputController : MonoBehaviour
         currentPhase = TouchPhase.Moved;
         gestureDelta = gestureStartPosition - currentPosition;
 
-        UpdateGestureProperties();
+        UpdateGestureProperties(currentPosition);
     }
 
     void OnControlRelease()
@@ -113,13 +115,35 @@ public class InputController : MonoBehaviour
         gestureDelta = Vector3.zero;
         gesturePower = 0;
         gestureZAngleOffset = 0;
+
+        statsGObject.SetActive(false);
+        if (statsText == null)
+        {
+            statsText = statsGObject.GetComponent<Text>();
+        }
     }
 
-    private void UpdateGestureProperties()
+    private void UpdateGestureProperties(Vector3 position)
     {
         gesturePower = (int)Mathf.Clamp(gestureDelta.y / unitsYPerPower + 2, 0, 3);
         gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * gestureDelta.x, -180, 180);
 
         game.AimRocketAtAngle(gestureZAngleOffset);
+
+        statsGObject.SetActive(true);
+        // TODO: maybe later add invisible game object at touch position, child statsGObject to it here
+        statsGObject.transform.position = position + new Vector3(0, 20, 0);
+
+        float halfWidth = statsGObject.GetComponent<RectTransform>().rect.width / 2;
+        var oldPos = statsGObject.transform.position;
+        //oldPos.x = Mathf.Clamp(statsGObject.transform.position.x, halfWidth, game.GetOverlayCanvasWidth() - halfWidth); //need to implement GetOverlayCanvasWidth
+        statsGObject.transform.position = oldPos;
+
+        statsText.text = (gesturePower > 0) ?
+            string.Format("Power Level: {0}\nAngle: {1}", 
+                gesturePower, 
+                (int)gestureZAngleOffset
+            ) :
+            "Cancel\nShot";
     }
 }
