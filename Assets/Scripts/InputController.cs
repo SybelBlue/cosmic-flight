@@ -98,7 +98,7 @@ public class InputController : MonoBehaviour
     {
         if (gesturePower > 0)
         {
-            game.Shoot(gestureZAngleOffset, gesturePower);
+            game.ShootRocket(gestureZAngleOffset, gesturePower);
         }
         else
         {

@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour
         return rocketGObject.transform.position;
     }
 
-    public void Shoot(float angle, int power) //add angle and power params?
+    public void ShootRocket(float angle, int power) //add angle and power params?
     {
 
         Debug.Log("Fire! pow:" + power + ", angle:" + angle);

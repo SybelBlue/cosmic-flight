@@ -22,14 +22,6 @@ public class RocketController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var spriteTransform = transform.GetChild(0).transform;
-        var spriteRot = spriteTransform.rotation;
-        
-        var zRotDegrees = Mathf.Rad2Deg * Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x);
-
-        spriteRot.eulerAngles = new Vector3(0, 0, zRotDegrees + zAngleOffset);
-        spriteTransform.rotation = spriteRot;
-
         ///// FOR TESTING ONLY /////
         // Adds line from rocket representing velocity
         Debug.DrawLine(transform.position, ((Vector2) transform.position) + rigidbody.velocity * 3, Color.green);
@@ -39,6 +31,15 @@ public class RocketController : MonoBehaviour
     public void ApplyGravitationalForce(Vector2 force)
     {
         rigidbody.AddForce(force);
+
+        var spriteTransform = transform.GetChild(0).transform;
+        var spriteRot = spriteTransform.rotation;
+
+        var zRotDegrees = Mathf.Rad2Deg * Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x);
+
+        spriteRot.eulerAngles = new Vector3(0, 0, zRotDegrees + zAngleOffset);
+        spriteTransform.rotation = spriteRot;
+
     }
 
     public void AddRelativiticStretch(Vector3 scale)
@@ -51,9 +52,7 @@ public class RocketController : MonoBehaviour
         var rigidbodyTransform = transform;
         var rigidbodyRot = rigidbodyTransform.rotation;
 
-        var rigidbodyDeg = Mathf.Rad2Deg * Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x);
-
-        rigidbodyRot.eulerAngles = new Vector3(0, 0, rigidbodyDeg + angle);
+        rigidbodyRot.eulerAngles = new Vector3(0, 0, zAngleOffset + angle);
         rigidbodyTransform.rotation = rigidbodyRot;
 
     }
