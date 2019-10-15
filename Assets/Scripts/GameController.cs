@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     public GameObject rocketGObject;
     public GameObject blackHoleGObject;
 
+    public Canvas screenOverlayCanvas;
+
     private RocketController rocketController;
     private BlackHoleController blackHoleController;
 
@@ -36,16 +38,18 @@ public class GameController : MonoBehaviour
         // Do nothing if not in play
         if (!inPlay) return;
 
-        var force = blackHoleController.GetGravitationalForce(rocketGObject);
-        rocketController.ApplyGravitationalForce(force);
+        rocketController.ApplyGravitationalForce(
+            blackHoleController.GetGravitationalForce(rocketGObject.transform.position)
+            );
     }
 
-    public void ObjectDied(GameObject thing)
+    public void ObjectHitBlackHole(GameObject thing)
     {
         if (thing.tag == "Player")
         {
             GameOver();
         }
+
         Destroy(thing);
     }
 
@@ -55,12 +59,7 @@ public class GameController : MonoBehaviour
         Debug.Log("Game Over!");
     }
 
-    public Vector3 GetRocketPosition()
-    {
-        return rocketGObject.transform.position;
-    }
-
-    public void ShootRocket(float angle, int power) //add angle and power params?
+    internal void ShootRocket(float angle, int power) 
     {
 
         Debug.Log("Fire! pow:" + power + ", angle:" + angle);
@@ -73,8 +72,18 @@ public class GameController : MonoBehaviour
         rocketController.AimAtAngle(angle);
     }
 
+    internal void ShotCancelled()
+    {
+        rocketController.ResetRotation();
+    }
+
     internal float GetOverlayCanvasWidth()
     {
-        throw new NotImplementedException();
+        return screenOverlayCanvas.GetComponent<RectTransform>().rect.width;
+    }
+
+    internal float GetOverlayCanvasHeight()
+    {
+        return screenOverlayCanvas.GetComponent<RectTransform>().rect.height;
     }
 }

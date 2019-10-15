@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
 
     public GameObject sprite;
-    // for when a sprite (like the one I started with randomly) is crooked.
-    public float zAngleOffset;
+    public float defaultAngle;
 
     private Rigidbody2D rigidbody;
 
@@ -13,10 +13,17 @@ public class RocketController : MonoBehaviour
     {
         rigidbody = transform.GetComponent<Rigidbody2D>();
 
+        ResetRotation();
+
         ////// FOR TESTING ONLY ///////
         // Gives initial speed
         // rigidbody.velocity = new Vector2(10, -10);
         //////////////////////////////
+    }
+
+    internal void ResetRotation()
+    {
+        AimAtAngle(0);
     }
 
     // Update is called once per frame
@@ -28,32 +35,30 @@ public class RocketController : MonoBehaviour
         ///////////////////////////
     }
 
-    public void ApplyGravitationalForce(Vector2 force)
+    internal void ApplyGravitationalForce(Vector2 force)
     {
         rigidbody.AddForce(force);
 
-        var spriteTransform = transform.GetChild(0).transform;
-        var spriteRot = spriteTransform.rotation;
+        var newRotation = transform.rotation;
 
         var zRotDegrees = Mathf.Rad2Deg * Mathf.Atan2(rigidbody.velocity.y, rigidbody.velocity.x);
 
-        spriteRot.eulerAngles = new Vector3(0, 0, zRotDegrees + zAngleOffset);
-        spriteTransform.rotation = spriteRot;
+        newRotation.eulerAngles = new Vector3(0, 0, zRotDegrees);
+        transform.rotation = newRotation;
 
     }
 
-    public void AddRelativiticStretch(Vector3 scale)
+    internal void AddRelativiticStretch(Vector3 scale)
     {
         transform.localScale = scale;
     }
 
-    public void AimAtAngle(float angle) 
+    internal void AimAtAngle(float angle) 
     {
         var rigidbodyTransform = transform;
         var rigidbodyRot = rigidbodyTransform.rotation;
 
-        rigidbodyRot.eulerAngles = new Vector3(0, 0, zAngleOffset + angle);
+        rigidbodyRot.eulerAngles = new Vector3(0, 0, angle + defaultAngle);
         rigidbodyTransform.rotation = rigidbodyRot;
-
     }
 }
