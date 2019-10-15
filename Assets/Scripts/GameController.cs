@@ -66,6 +66,7 @@ public class GameController : MonoBehaviour
         Debug.Log("Fire! pow:" + power + ", angle:" + angle);
         inPlay = true; // starts gravity
         // more shooting logic here
+        rocketController.LaunchRocket(angle, power);
     }
 
     internal void AimRocketAtAngle(float angle)
