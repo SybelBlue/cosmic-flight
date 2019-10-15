@@ -9,6 +9,8 @@ public class RocketController : MonoBehaviour
 
     private Rigidbody2D rigidbody;
 
+    public float velocityPerPower;
+
     private void Start()
     {
         rigidbody = transform.GetComponent<Rigidbody2D>();
@@ -19,6 +21,7 @@ public class RocketController : MonoBehaviour
         // Gives initial speed
         // rigidbody.velocity = new Vector2(10, -10);
         //////////////////////////////
+    
     }
 
     internal void ResetRotation()
@@ -60,5 +63,11 @@ public class RocketController : MonoBehaviour
 
         rigidbodyRot.eulerAngles = new Vector3(0, 0, angle + defaultAngle);
         rigidbodyTransform.rotation = rigidbodyRot;
+    }
+
+    public void LaunchRocket(float angle, int power)
+    {
+        AimAtAngle(angle);
+        rigidbody.velocity = power * velocityPerPower * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 }
