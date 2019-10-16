@@ -4,35 +4,46 @@ using UnityEngine.UI;
 
 public class InputController : MonoBehaviour
 {
-
+    // game controller to report events to
     public GameController game;
 
+    // statistics text game object...
     public GameObject statsGObject;
+    // ...and text
     private Text statsText;
 
+    // current simplified gesture phase, (Began, Moved, Ended only)
     public TouchPhase currentPhase;
 
+    // pixels dragged in the y to increase power one step
     public int unitsYPerPower;
+    // degrees to increase for each pixel dragged in the x
     public float degreesPerUnitX;
 
+    // computed current gesture power (0 when currentPhase is Ended)
     public int gesturePower;
+    // computed current gesture angle offset (0 when currentPhase is Ended)
     public float gestureZAngleOffset;
 
-    private Vector3 gestureStartPosition;
-    private Vector3 gestureDelta;
+    // current gesture first touch (Vector3.zero when currentPhase is Ended)
+    public Vector3 gestureStartPosition;
+    // computed current gesture delta from first touch (Vector3.zero when currentPhase is Ended)
+    public Vector3 gestureDelta;
+
+    // scalar factor * 100 to move camera when peeking around during flight
+    public float peekSensitivity;
+    // when true, shot statistics are displayed under the finger during gesture
+    public bool displayStatistics;
 
     private void Start()
     {
+        displayStatistics = true;
         ResetFields();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Only allow user control when the rocket isn't moving towards the black hole
-        // TODO: make stages of flight potentially...
-        if (game.inPlay) return;
-
         CheckForTouches();
 
         CheckForClicks();
@@ -46,7 +57,7 @@ public class InputController : MonoBehaviour
         Touch touch = Input.touches[0];
         if (currentPhase == TouchPhase.Ended)
         {
-            OnControlGestureStart(touch.position);
+            OnGestureStart(touch.position);
         }
         else if (touch.phase == TouchPhase.Canceled)
         {
@@ -54,11 +65,11 @@ public class InputController : MonoBehaviour
         }
         else if (touch.phase == TouchPhase.Ended)
         {
-            OnControlRelease();
+            OnGestureRelease();
         }
         else
         {
-            OnControlDrag(touch.position);
+            OnGestureDrag(touch.position);
         }
     }
 
@@ -67,21 +78,21 @@ public class InputController : MonoBehaviour
         // frame that it was pressed down?
         if (Input.GetMouseButtonDown(0))
         {
-            OnControlGestureStart(Input.mousePosition);
+            OnGestureStart(Input.mousePosition);
         }
         // frame that it was released?
         else if (Input.GetMouseButtonUp(0))
         {
-            OnControlRelease();
+            OnGestureRelease();
         }
         // is currently held down?
         else if (Input.GetMouseButton(0))
         {
-            OnControlDrag(Input.mousePosition);
+            OnGestureDrag(Input.mousePosition);
         }
     }
 
-    void OnControlGestureStart(Vector3 startPosition)
+    void OnGestureStart(Vector3 startPosition)
     {
         // display rings around rocket, display touch point
         currentPhase = TouchPhase.Began;
@@ -90,7 +101,7 @@ public class InputController : MonoBehaviour
         UpdateGestureProperties(startPosition);
     }
 
-    void OnControlDrag(Vector3 currentPosition)
+    void OnGestureDrag(Vector3 currentPosition)
     {
         currentPhase = TouchPhase.Moved;
         gestureDelta = gestureStartPosition - currentPosition;
@@ -98,16 +109,9 @@ public class InputController : MonoBehaviour
         UpdateGestureProperties(currentPosition);
     }
 
-    void OnControlRelease()
+    void OnGestureRelease()
     {
-        if (gesturePower > 0)
-        {
-            game.ShootRocket(gestureZAngleOffset, gesturePower);
-        }
-        else
-        {
-            game.ShotCancelled();
-        }
+        game.GestureEnded(this);
 
         ResetFields();
     }
@@ -125,6 +129,7 @@ public class InputController : MonoBehaviour
         {
             statsText = statsGObject.GetComponent<Text>();
         }
+        statsText.text = "Stats Text\nStats Text 2";
     }
 
     private void UpdateGestureProperties(Vector3 position)
@@ -132,9 +137,12 @@ public class InputController : MonoBehaviour
         gesturePower = (int)Mathf.Clamp(gestureDelta.y / unitsYPerPower + 2, 0, 3);
         gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * gestureDelta.x, -180, 180);
 
-        game.AimRocketAtAngle(gestureZAngleOffset);
+        game.GestureUpdated(this);
 
-        DisplayShotStatistics(position);
+        if (displayStatistics)
+        {
+            DisplayShotStatistics(position);
+        }
     }
 
     private void DisplayShotStatistics(Vector3 position)
@@ -145,13 +153,15 @@ public class InputController : MonoBehaviour
 
         var newPos = statsGObject.transform.position;
 
+        // weird units here, hence the *2 and the *4, though I'm not sure why...
+
         // clamp the object so that it can't be offscreen in the x direction...
         float halfWidth = statsGObject.GetComponent<RectTransform>().rect.width / 2;
-        newPos.x = Mathf.Clamp(newPos.x, halfWidth, game.GetOverlayCanvasWidth() - halfWidth);
+        newPos.x = Mathf.Clamp(newPos.x, halfWidth, game.GetOverlayCanvasWidth() - halfWidth * 2);
 
         // ... or the y direction
         float halfHeight = statsGObject.GetComponent<RectTransform>().rect.height / 2;
-        newPos.y = Mathf.Clamp(newPos.y, halfHeight, game.GetOverlayCanvasHeight() - halfHeight);
+        newPos.y = Mathf.Clamp(newPos.y, halfHeight, game.GetOverlayCanvasHeight() - 4 * halfHeight);
 
         statsGObject.transform.position = newPos;
 

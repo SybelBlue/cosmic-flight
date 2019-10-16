@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour
 
     public Vector3 rocketStartingPosition;
 
+    public CameraController mainCameraController;
     public GameObject rocketPrefab;
     public GameObject blackHolePrefab;
 
@@ -18,11 +19,13 @@ public class GameController : MonoBehaviour
     private BlackHoleController blackHoleController;
 
     public bool inPlay;
+    public bool cameraFollow;
 
     // Start is called before the first frame update
     void Start()
     {
         inPlay = false;
+        SetCameraFollowMode(false);
 
         blackHoleGObject = Instantiate(blackHolePrefab);
         blackHoleController = blackHoleGObject.GetComponent<BlackHoleController>();
@@ -42,7 +45,17 @@ public class GameController : MonoBehaviour
         rocketController.ApplyGravitationalForce(force);
     }
 
-    public void ObjectHitBlackHole(GameObject thing)
+    public void ToggleCameraFollowMode()
+    {
+        SetCameraFollowMode(!cameraFollow);
+    }
+
+    internal void SetCameraFollowMode(bool mode)
+    {
+        mainCameraController.mode = (cameraFollow = mode) ? CameraMode.FollowRocket : CameraMode.Neutral;
+    }
+
+    internal void ObjectHitBlackHole(GameObject thing)
     {
         if (thing.tag == "Player")
         {
@@ -52,7 +65,7 @@ public class GameController : MonoBehaviour
         Destroy(thing);
     }
 
-    void GameOver()
+    private void GameOver()
     {
         inPlay = false;
         Debug.Log("Game Over!");
@@ -60,18 +73,19 @@ public class GameController : MonoBehaviour
         //TODO: show retry button
     }
 
-    internal void ShootRocket(float angle, int power) 
+    private void ShootRocket(float angle, int power) 
     {
         inPlay = true; // starts gravity
         rocketController.LaunchRocket(angle, power);
+        ToggleCameraFollowMode();
     }
 
-    internal void AimRocketAtAngle(float angle)
+    private void AimRocketAtAngle(float angle)
     {
         rocketController.AimAtAngle(angle);
     }
 
-    internal void ShotCancelled()
+    private void ShotCancelled()
     {
         rocketController.ResetRotation();
     }
@@ -84,5 +98,42 @@ public class GameController : MonoBehaviour
     internal float GetOverlayCanvasHeight()
     {
         return screenOverlayCanvas.GetComponent<RectTransform>().rect.height;
+    }
+
+    internal Vector3 CurrentRocketPosition()
+    {
+        return rocketGObject.transform.position;
+    }
+
+    internal void GestureEnded(InputController input)
+    {
+        if (inPlay)
+        {
+            mainCameraController.offsetFromCenter = Vector3.zero;
+            return;
+        }
+
+        if (input.gesturePower > 0)
+        {
+            input.displayStatistics = false;
+            ShootRocket(input.gestureZAngleOffset, input.gesturePower);
+        }
+        else
+        {
+            ShotCancelled();
+        }
+    }
+
+    internal void GestureUpdated(InputController input)
+    {
+        if (inPlay)
+        {
+            mainCameraController.offsetFromCenter = 
+                input.gestureDelta * Mathf.Clamp(input.peekSensitivity / 100, 0.01f, 2.5f);
+        }
+        else
+        {
+            AimRocketAtAngle(input.gestureZAngleOffset);
+        }
     }
 }
