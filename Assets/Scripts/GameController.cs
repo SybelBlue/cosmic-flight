@@ -38,8 +38,9 @@ public class GameController : MonoBehaviour
         // Do nothing if not in play
         if (!inPlay) return;
 
-        Vector3 force = blackHoleController.GetGravitationalForce(rocketGObject.transform.position);
-        rocketController.ApplyGravitationalForce(force);
+        rocketController.ApplyGravitationalForce(
+            blackHoleController.GetGravitationalForce(rocketGObject.transform.position)
+            );
     }
 
     public void ObjectHitBlackHole(GameObject thing)
@@ -56,13 +57,14 @@ public class GameController : MonoBehaviour
     {
         inPlay = false;
         Debug.Log("Game Over!");
-
-        //TODO: show retry button
     }
 
     internal void ShootRocket(float angle, int power) 
     {
+
+        Debug.Log("Fire! pow:" + power + ", angle:" + angle);
         inPlay = true; // starts gravity
+        // more shooting logic here
         rocketController.LaunchRocket(angle, power);
     }
 

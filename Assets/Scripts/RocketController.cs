@@ -61,22 +61,13 @@ public class RocketController : MonoBehaviour
         var rigidbodyTransform = transform;
         var rigidbodyRot = rigidbodyTransform.rotation;
 
-        rigidbodyRot.eulerAngles = new Vector3(0, 0, GetRelativeAngle(angle));
+        rigidbodyRot.eulerAngles = new Vector3(0, 0, angle + defaultAngle);
         rigidbodyTransform.rotation = rigidbodyRot;
     }
 
     public void LaunchRocket(float angle, int power)
     {
         AimAtAngle(angle);
-
-        float adjustedAngle = Mathf.Deg2Rad * GetRelativeAngle(angle);
-        /// !!!!!!!!!!!!!!!!!!!!!!! MATHF TAKES RADIANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        var newVelocity = power * velocityPerPower * new Vector2(Mathf.Cos(adjustedAngle), Mathf.Sin(adjustedAngle));
-        rigidbody.velocity += newVelocity;
-    }
-
-    private float GetRelativeAngle(float standardAngle)
-    {
-        return standardAngle + defaultAngle;
+        rigidbody.velocity = power * velocityPerPower * new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 }
