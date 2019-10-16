@@ -41,9 +41,8 @@ public class GameController : MonoBehaviour
         // Do nothing if not in play
         if (!inPlay) return;
 
-        rocketController.ApplyGravitationalForce(
-            blackHoleController.GetGravitationalForce(rocketGObject.transform.position)
-            );
+        Vector3 force = blackHoleController.GetGravitationalForce(rocketGObject.transform.position);
+        rocketController.ApplyGravitationalForce(force);
     }
 
     public void ToggleCameraFollowMode()
@@ -74,12 +73,9 @@ public class GameController : MonoBehaviour
 
     private void ShootRocket(float angle, int power) 
     {
-
-        Debug.Log("Fire! pow:" + power + ", angle:" + angle);
         inPlay = true; // starts gravity
-        // more shooting logic here
         rocketController.LaunchRocket(angle, power);
-        ToggleCameraFollowMode();
+        SetCameraFollowMode(true);
     }
 
     private void AimRocketAtAngle(float angle)
