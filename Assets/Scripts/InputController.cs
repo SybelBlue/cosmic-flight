@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InputController : MonoBehaviour
@@ -28,6 +29,10 @@ public class InputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Only allow user control when the rocket isn't moving towards the black hole
+        // TODO: make stages of flight potentially...
+        if (game.inPlay) return;
+
         CheckForTouches();
 
         CheckForClicks();
@@ -87,7 +92,6 @@ public class InputController : MonoBehaviour
 
     void OnControlDrag(Vector3 currentPosition)
     {
-        // change angle, change level
         currentPhase = TouchPhase.Moved;
         gestureDelta = gestureStartPosition - currentPosition;
 
@@ -102,7 +106,7 @@ public class InputController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Fire cancelled.");
+            game.ShotCancelled();
         }
 
         ResetFields();
@@ -130,18 +134,31 @@ public class InputController : MonoBehaviour
 
         game.AimRocketAtAngle(gestureZAngleOffset);
 
+        DisplayShotStatistics(position);
+    }
+
+    private void DisplayShotStatistics(Vector3 position)
+    {
         statsGObject.SetActive(true);
         // TODO: maybe later add invisible game object at touch position, child statsGObject to it here
         statsGObject.transform.position = position + new Vector3(0, 20, 0);
 
-        float halfWidth = statsGObject.GetComponent<RectTransform>().rect.width / 2;
-        var oldPos = statsGObject.transform.position;
-        //oldPos.x = Mathf.Clamp(statsGObject.transform.position.x, halfWidth, game.GetOverlayCanvasWidth() - halfWidth); //need to implement GetOverlayCanvasWidth
-        statsGObject.transform.position = oldPos;
+        var newPos = statsGObject.transform.position;
 
+        // clamp the object so that it can't be offscreen in the x direction...
+        float halfWidth = statsGObject.GetComponent<RectTransform>().rect.width / 2;
+        newPos.x = Mathf.Clamp(newPos.x, halfWidth, game.GetOverlayCanvasWidth() - halfWidth);
+
+        // ... or the y direction
+        float halfHeight = statsGObject.GetComponent<RectTransform>().rect.height / 2;
+        newPos.y = Mathf.Clamp(newPos.y, halfHeight, game.GetOverlayCanvasHeight() - halfHeight);
+
+        statsGObject.transform.position = newPos;
+
+        // set the text
         statsText.text = (gesturePower > 0) ?
-            string.Format("Power Level: {0}\nAngle: {1}", 
-                gesturePower, 
+            string.Format("Power Level: {0}\nAngle: {1}",
+                gesturePower,
                 (int)gestureZAngleOffset
             ) :
             "Cancel\nShot";

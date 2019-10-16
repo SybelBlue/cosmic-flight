@@ -7,9 +7,9 @@ public class BlackHoleController : MonoBehaviour
 
     public GameController gameController;
 
-    public Vector3 GetGravitationalForce(GameObject rocket)
+    public Vector3 GetGravitationalForce(Vector3 rocketPosition)
     {
-        var r = this.transform.position - rocket.transform.position;
+        var r = this.transform.position - rocketPosition;
         Debug.DrawLine(this.transform.position, this.transform.position - r);
         r.Normalize();
         r.Scale(massCoefficient / r.sqrMagnitude * Vector3.one);
@@ -19,6 +19,6 @@ public class BlackHoleController : MonoBehaviour
     // Destroy everything that enters the trigger
     void OnTriggerEnter2D(Collider2D collider)
     {
-        gameController.ObjectDied(collider.gameObject);
+        gameController.ObjectHitBlackHole(collider.gameObject);
     }
 }
