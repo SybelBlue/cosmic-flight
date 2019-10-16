@@ -123,8 +123,9 @@ GameObject:
   - component: {fileID: 428525990}
   - component: {fileID: 428525989}
   - component: {fileID: 428525988}
+  - component: {fileID: 428525991}
   m_Layer: 5
-  m_Name: Shot Text
+  m_Name: Shot Statistics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,6 +192,19 @@ RectTransform:
   m_AnchoredPosition: {x: 129, y: -176}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &428525991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428525987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c10c93224218b42b769c8ad45b91fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsText: {fileID: 428525988}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,10 +252,6 @@ MonoBehaviour:
   offsetFromCenter: {x: 0, y: 0, z: 0}
   mapX: 480
   mapY: 480
-  minX: 0
-  maxX: 0
-  minY: 0
-  maxY: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -964,15 +974,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketStartingPosition: {x: -40, y: -40, z: 0}
   mainCameraController: {fileID: 519420030}
+  inputController: {fileID: 2119872604}
   rocketPrefab: {fileID: 2794735893918823343, guid: 590311b7672eb8346a2896b26126bb14,
     type: 3}
   blackHolePrefab: {fileID: 5418893137681466505, guid: 5ab60bb53d382564887a438af39b1075,
     type: 3}
+  statsController: {fileID: 428525991}
   rocketGObject: {fileID: 0}
   blackHoleGObject: {fileID: 0}
   screenOverlayCanvas: {fileID: 1415570615}
   inPlay: 0
   cameraFollow: 0
+  displayStatistics: 0
 --- !u!4 &2119872603
 Transform:
   m_ObjectHideFlags: 0
@@ -999,14 +1012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b5d373116d35d459a87e067525396e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 2119872602}
-  statsGObject: {fileID: 428525987}
-  currentPhase: 0
   unitsYPerPower: 50
   degreesPerUnitX: 1.2
-  gesturePower: 0
-  gestureZAngleOffset: 0
-  gestureStartPosition: {x: 0, y: 0, z: 0}
-  gestureDelta: {x: 0, y: 0, z: 0}
   peekSensitivity: 10
-  displayStatistics: 0

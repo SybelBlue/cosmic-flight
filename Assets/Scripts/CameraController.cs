@@ -19,7 +19,9 @@ public class CameraController : MonoBehaviour
 
     public Vector3 offsetFromCenter;
 
-    public float mapX, mapY, minX, maxX, minY, maxY;
+    public float mapX, mapY;
+    
+    private float minX, maxX, minY, maxY;
 
     private Camera camera;
 

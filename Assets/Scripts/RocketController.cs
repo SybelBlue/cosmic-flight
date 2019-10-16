@@ -16,12 +16,6 @@ public class RocketController : MonoBehaviour
         rigidbody = transform.GetComponent<Rigidbody2D>();
 
         ResetRotation();
-
-        ////// FOR TESTING ONLY ///////
-        // Gives initial speed
-        // rigidbody.velocity = new Vector2(10, -10);
-        //////////////////////////////
-
     }
 
     internal void ResetRotation()

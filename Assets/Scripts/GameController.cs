@@ -7,8 +7,10 @@ public class GameController : MonoBehaviour
     public Vector3 rocketStartingPosition;
 
     public CameraController mainCameraController;
+    public InputController inputController;
     public GameObject rocketPrefab;
     public GameObject blackHolePrefab;
+    public StatsController statsController;
 
     public GameObject rocketGObject;
     public GameObject blackHoleGObject;
@@ -20,12 +22,23 @@ public class GameController : MonoBehaviour
 
     public bool inPlay;
     public bool cameraFollow;
+    // when true, shot statistics are displayed under the finger during gesture
+    public bool displayStatistics;
+
+    private float canvasWidth, canvasHeight;
 
     // Start is called before the first frame update
     void Start()
     {
         inPlay = false;
         SetCameraFollowMode(false);
+
+        canvasWidth = screenOverlayCanvas.GetComponent<RectTransform>().rect.width;
+        canvasHeight = screenOverlayCanvas.GetComponent<RectTransform>().rect.height;
+
+        // sets a callback on inputController, works like magic.
+        inputController.whenUpdated += GestureUpdated;
+        inputController.whenEnded += GestureEnded;
 
         blackHoleGObject = Instantiate(blackHolePrefab);
         blackHoleController = blackHoleGObject.GetComponent<BlackHoleController>();
@@ -74,6 +87,7 @@ public class GameController : MonoBehaviour
     private void ShootRocket(float angle, int power) 
     {
         inPlay = true; // starts gravity
+        displayStatistics = false;
         rocketController.LaunchRocket(angle, power);
         SetCameraFollowMode(true);
     }
@@ -103,7 +117,7 @@ public class GameController : MonoBehaviour
         return rocketGObject.transform.position;
     }
 
-    internal void GestureEnded(InputController input)
+    internal void GestureEnded(InputConstants input)
     {
         if (inPlay)
         {
@@ -113,25 +127,25 @@ public class GameController : MonoBehaviour
 
         if (input.gesturePower > 0)
         {
-            input.displayStatistics = false;
             ShootRocket(input.gestureZAngleOffset, input.gesturePower);
         }
         else
         {
             ShotCancelled();
         }
+        statsController.ResetFields();
     }
 
-    internal void GestureUpdated(InputController input)
+    internal void GestureUpdated(InputConstants input)
     {
         if (inPlay)
         {
-            mainCameraController.offsetFromCenter = 
-                input.gestureDelta * Mathf.Clamp(input.peekSensitivity / 100, 0.01f, 2.5f);
+            mainCameraController.offsetFromCenter = input.cameraOffset;
         }
         else
         {
             AimRocketAtAngle(input.gestureZAngleOffset);
+            statsController.DisplayShotStatistics(input, canvasWidth, canvasHeight);
         }
     }
 }
