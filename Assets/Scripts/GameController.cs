@@ -5,15 +5,20 @@ public class GameController : MonoBehaviour
 {
 
     public Vector3 rocketStartingPosition;
+    public Vector3 exitPlanetPosition;
 
     public CameraController mainCameraController;
     public InputController inputController;
+    
     public GameObject rocketPrefab;
     public GameObject blackHolePrefab;
+    public GameObject exitPlanetPrefab;
+
     public StatsController statsController;
 
     public GameObject rocketGObject;
     public GameObject blackHoleGObject;
+    public GameObject exitPlanetGObject;
 
     public Canvas screenOverlayCanvas;
 
@@ -46,6 +51,8 @@ public class GameController : MonoBehaviour
 
         rocketGObject = Instantiate(rocketPrefab, rocketStartingPosition, Quaternion.Euler(0, 0, 0));
         rocketController = rocketGObject.GetComponent<RocketController>();
+
+        exitPlanetGObject = Instantiate(exitPlanetPrefab, exitPlanetPosition, Quaternion.Euler(0, 0, 0));
     }
 
     // Update is called once per frame

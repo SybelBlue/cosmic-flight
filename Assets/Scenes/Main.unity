@@ -973,15 +973,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rocketStartingPosition: {x: -40, y: -40, z: 0}
+  exitPlanetPosition: {x: 40, y: -40, z: 0}
   mainCameraController: {fileID: 519420030}
   inputController: {fileID: 2119872604}
   rocketPrefab: {fileID: 2794735893918823343, guid: 590311b7672eb8346a2896b26126bb14,
     type: 3}
   blackHolePrefab: {fileID: 5418893137681466505, guid: 5ab60bb53d382564887a438af39b1075,
     type: 3}
+  exitPlanetPrefab: {fileID: 4474639943209264299, guid: 2d15a1e37c6c0ea428382d40708d56b5,
+    type: 3}
   statsController: {fileID: 428525991}
   rocketGObject: {fileID: 0}
   blackHoleGObject: {fileID: 0}
+  exitPlanetGObject: {fileID: 0}
   screenOverlayCanvas: {fileID: 1415570615}
   inPlay: 0
   cameraFollow: 0
