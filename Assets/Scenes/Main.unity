@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c10c93224218b42b769c8ad45b91fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchOffset: {x: 0, y: 40, z: 0}
   statsText: {fileID: 428525988}
 --- !u!1 &519420028
 GameObject:
@@ -620,7 +621,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96

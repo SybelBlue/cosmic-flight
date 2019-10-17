@@ -200,7 +200,7 @@ public class InputController : MonoBehaviour
     private void UpdateGestureProperties(Vector3 position)
     {
         currentState.gesturePower = (int)Mathf.Clamp(currentState.gestureDelta.y / unitsYPerPower + 2, 0, 3);
-        currentState.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * currentState.gestureDelta.x, -180, 180);
+        currentState.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * currentState.gestureDelta.x, -360, 360);
         currentState.cameraOffset = currentState.gestureDelta * Mathf.Clamp(peekSensitivity / 100, 0.01f, 2.5f);
 
         whenUpdated(currentState.copy());
