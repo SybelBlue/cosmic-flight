@@ -9,11 +9,12 @@ public class GameController : MonoBehaviour
 
     public CameraController mainCameraController;
     public InputController inputController;
-    
+
     public GameObject rocketPrefab;
     public GameObject blackHolePrefab;
     public GameObject exitPlanetPrefab;
 
+    public GameObject cameraAngleButton;
     public StatsController statsController;
 
     public GameObject rocketGObject;
@@ -24,9 +25,9 @@ public class GameController : MonoBehaviour
 
     private RocketController rocketController;
     private BlackHoleController blackHoleController;
+    private ExitPlanetController exitPlanetController;
 
     public bool inPlay;
-    public bool cameraFollow;
     // when true, shot statistics are displayed under the finger during gesture
     public bool displayStatistics;
 
@@ -36,7 +37,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         inPlay = false;
-        SetCameraFollowMode(false);
+        SetCameraFollowMode(CameraMode.Neutral);
 
         canvasWidth = screenOverlayCanvas.GetComponent<RectTransform>().rect.width;
         canvasHeight = screenOverlayCanvas.GetComponent<RectTransform>().rect.height;
@@ -53,12 +54,14 @@ public class GameController : MonoBehaviour
         rocketController = rocketGObject.GetComponent<RocketController>();
 
         exitPlanetGObject = Instantiate(exitPlanetPrefab, exitPlanetPosition, Quaternion.Euler(0, 0, 0));
+        exitPlanetController = exitPlanetGObject.GetComponent<ExitPlanetController>();
+        exitPlanetController.gameController = this;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Do nothing if not in play
+        cameraAngleButton.SetActive(inPlay);
         if (!inPlay) return;
 
         Vector3 force = blackHoleController.GetGravitationalForce(rocketGObject.transform.position);
@@ -67,12 +70,16 @@ public class GameController : MonoBehaviour
 
     public void ToggleCameraFollowMode()
     {
-        SetCameraFollowMode(!cameraFollow);
+        SetCameraFollowMode(
+            mainCameraController.mode == CameraMode.Neutral ?
+                CameraMode.FollowRocket :
+                CameraMode.Neutral
+            ) ;
     }
 
-    internal void SetCameraFollowMode(bool mode)
+    internal void SetCameraFollowMode(CameraMode mode)
     {
-        mainCameraController.mode = (cameraFollow = mode) ? CameraMode.FollowRocket : CameraMode.Neutral;
+        mainCameraController.mode = mode;
     }
 
     internal void ObjectHitBlackHole(GameObject thing)
@@ -80,9 +87,17 @@ public class GameController : MonoBehaviour
         if (thing.tag == "Player")
         {
             GameOver();
+            rocketController = null;
         }
 
         Destroy(thing);
+    }
+
+    internal void LandOnPlanet(GameObject planet)
+    {
+        inPlay = false;
+        SetCameraFollowMode(CameraMode.Neutral);
+        rocketController.LandOn(planet);
     }
 
     private void GameOver()
@@ -96,7 +111,7 @@ public class GameController : MonoBehaviour
         inPlay = true; // starts gravity
         displayStatistics = false;
         rocketController.LaunchRocket(angle, power);
-        SetCameraFollowMode(true);
+        SetCameraFollowMode(CameraMode.FollowRocket);
     }
 
     private void AimRocketAtAngle(float angle)
@@ -107,21 +122,15 @@ public class GameController : MonoBehaviour
     private void ShotCancelled()
     {
         rocketController.ResetRotation();
-    }
-
-    internal float GetOverlayCanvasWidth()
-    {
-        return screenOverlayCanvas.GetComponent<RectTransform>().rect.width;
-    }
-
-    internal float GetOverlayCanvasHeight()
-    {
-        return screenOverlayCanvas.GetComponent<RectTransform>().rect.height;
+        SetCameraFollowMode(CameraMode.Neutral);
     }
 
     internal Vector3 CurrentRocketPosition()
     {
-        return rocketGObject.transform.position;
+        return rocketGObject != null? 
+            rocketGObject.transform.position :
+        // presumably the rocket was sucked into the black hole and destroyed
+            blackHoleGObject.transform.position;
     }
 
     internal void GestureEnded(InputConstants input)
@@ -151,6 +160,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            SetCameraFollowMode(CameraMode.FollowRocket);
             AimRocketAtAngle(input.gestureZAngleOffset);
             statsController.DisplayShotStatistics(input, canvasWidth, canvasHeight);
         }

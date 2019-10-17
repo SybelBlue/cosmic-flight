@@ -1,11 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ExitPlanetController : MonoBehaviour
 {
+
+    public GameController gameController;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("You Won!");
+        if (collision.gameObject.tag == "Player")
+        {
+            gameController.LandOnPlanet(gameObject);
+        }
     }
 }
