@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
-    public GameObject planetToLandOn;
+    public GameObject planetToLandOn, planetLandedOn;
     public GameObject sprite;
     public float defaultAngle;
 
@@ -39,6 +39,7 @@ public class RocketController : MonoBehaviour
             else
             {
                 transform.position = planetToLandOn.transform.position;
+                planetLandedOn = planetToLandOn;
                 planetToLandOn = null;
             }
         }
@@ -96,6 +97,7 @@ public class RocketController : MonoBehaviour
         var newVelocity = power * velocityPerPower * new Vector2(Mathf.Cos(adjustedAngle), Mathf.Sin(adjustedAngle));
         rigidbody.velocity += newVelocity;
         showActualSize = true;
+        planetLandedOn = null;
     }
 
     private float GetRelativeAngle(float standardAngle)

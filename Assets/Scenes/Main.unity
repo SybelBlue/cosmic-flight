@@ -202,7 +202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &186531817
 RectTransform:
   m_ObjectHideFlags: 0
@@ -275,6 +275,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4ce43d17138824d82a7c32e52e864c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
+  label: {fileID: 186531818}
+  mode: 0
+  flyBurnRate: 8
+  asteroidLandedBurnRate: 3
+  target: 0
+  highO2Color: {r: 0.26711303, g: 0.5660378, b: 0.056069776, a: 0.42745098}
+  mediumO2Color: {r: 0.735849, g: 0.7109314, b: 0.38527945, a: 0.42745098}
+  lowO2Color: {r: 0.8396226, g: 0.24951048, b: 0.27812195, a: 1}
 --- !u!1 &428525987
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,9 +834,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 3
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.598
+  m_Value: 5.7
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1110,8 +1119,8 @@ RectTransform:
   m_Father: {fileID: 999721812}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.402}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1257,18 +1266,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a28bfaecd59e141a13b1b663900070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketStartingPosition: {x: -40, y: -40, z: 0}
-  exitPlanetPosition: {x: 40, y: -40, z: 0}
+  rocketStartingPosition: {x: -60, y: -60, z: 0}
+  exitPlanetPosition: {x: 60, y: 60, z: 0}
   mainCameraController: {fileID: 519420030}
   inputController: {fileID: 2119872604}
   rocketPrefab: {fileID: 2794735893918823343, guid: 590311b7672eb8346a2896b26126bb14,
     type: 3}
   blackHolePrefab: {fileID: 5418893137681466505, guid: 5ab60bb53d382564887a438af39b1075,
     type: 3}
-  exitPlanetPrefab: {fileID: 4474639943209264299, guid: 2d15a1e37c6c0ea428382d40708d56b5,
+  planetPrefab: {fileID: 4474639943209264299, guid: 2d15a1e37c6c0ea428382d40708d56b5,
+    type: 3}
+  asteroidPrefab: {fileID: 4138346932989457436, guid: 1968ebbcbf8b6ed449fcf48676c2ec4c,
     type: 3}
   cameraAngleButton: {fileID: 585265120}
   statsController: {fileID: 428525991}
+  oxygenMeterConroller: {fileID: 186531820}
   rocketGObject: {fileID: 0}
   blackHoleGObject: {fileID: 0}
   exitPlanetGObject: {fileID: 0}

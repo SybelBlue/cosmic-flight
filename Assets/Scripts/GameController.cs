@@ -12,7 +12,8 @@ public class GameController : MonoBehaviour
 
     public GameObject rocketPrefab;
     public GameObject blackHolePrefab;
-    public GameObject exitPlanetPrefab;
+    public GameObject planetPrefab;
+    public GameObject asteroidPrefab;
 
     public GameObject cameraAngleButton;
     public StatsController statsController;
@@ -55,7 +56,7 @@ public class GameController : MonoBehaviour
         rocketGObject = Instantiate(rocketPrefab, rocketStartingPosition, Quaternion.Euler(0, 0, 0));
         rocketController = rocketGObject.GetComponent<RocketController>();
 
-        exitPlanetGObject = Instantiate(exitPlanetPrefab, exitPlanetPosition, Quaternion.Euler(0, 0, 0));
+        exitPlanetGObject = Instantiate(planetPrefab, exitPlanetPosition, Quaternion.Euler(0, 0, 0));
         exitPlanetController = exitPlanetGObject.GetComponent<PlanetController>();
         exitPlanetController.gameController = this;
     }
@@ -173,5 +174,11 @@ public class GameController : MonoBehaviour
             AimRocketAtAngle(input.gestureZAngleOffset);
             statsController.DisplayShotStatistics(input, canvasWidth, canvasHeight);
         }
+    }
+
+    internal void OutOfOxygen()
+    {
+        Debug.Log("Out of Oxygen!");
+        GameOver();
     }
 }
