@@ -220,7 +220,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 23.4, y: 0}
+  m_AnchoredPosition: {x: 23.400024, y: 0}
   m_SizeDelta: {x: 104.67, y: 80.099976}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &186531818
@@ -275,6 +275,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4ce43d17138824d82a7c32e52e864c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
+  flyBurnRate: 0
+  asteroidLandedBurnRate: 0
+  target: 0
 --- !u!1 &428525987
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +612,7 @@ GameObject:
   - component: {fileID: 797221462}
   - component: {fileID: 797221461}
   - component: {fileID: 797221460}
+  - component: {fileID: 797221463}
   m_Layer: 5
   m_Name: RetryButton
   m_TagString: Untagged
@@ -632,7 +637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -360, y: -470}
+  m_AnchoredPosition: {x: -80, y: -470}
   m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &797221460
@@ -674,7 +679,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 797221461}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 797221463}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &797221461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -710,6 +726,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797221458}
   m_CullTransparentMesh: 0
+--- !u!114 &797221463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797221458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61df99dcf7fa94b99ad385c0e78af6f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &999721811
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,6 +1297,7 @@ MonoBehaviour:
     type: 3}
   cameraAngleButton: {fileID: 585265120}
   statsController: {fileID: 428525991}
+  oxygenMeterConroller: {fileID: 186531820}
   rocketGObject: {fileID: 0}
   blackHoleGObject: {fileID: 0}
   exitPlanetGObject: {fileID: 0}
