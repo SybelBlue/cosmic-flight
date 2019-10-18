@@ -22,7 +22,7 @@ public class OxygenMeterConroller : MonoBehaviour
     void Update()
     {
         target = GetTarget(mode);
-        slider.value = Mathf.Lerp(slider.value, target, 0.2f);
+        slider.value = Mathf.Lerp(slider.value, target, 0.5f);
     }
 
     private float GetTarget(OxygenMode mode)
