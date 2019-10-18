@@ -1303,4 +1303,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitsYPerPower: 50
   degreesPerUnitX: 1.2
-  peekSensitivity: 10
+  peekSensitivity: 0
