@@ -1008,5 +1008,5 @@ MonoBehaviour:
   gestureZAngleOffset: 0
   gestureStartPosition: {x: 0, y: 0, z: 0}
   gestureDelta: {x: 0, y: 0, z: 0}
-  peekSensitivity: 10
+  peekSensitivity: 0
   displayStatistics: 0
