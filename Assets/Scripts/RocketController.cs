@@ -11,6 +11,8 @@ public class RocketController : MonoBehaviour
 
     public float velocityPerPower;
     public bool showActualSize;
+    
+    internal bool isSafe { get { return planetToLandOn != null || planetLandedOn != null;  } }
 
     private void Start()
     {
@@ -97,6 +99,8 @@ public class RocketController : MonoBehaviour
         var newVelocity = power * velocityPerPower * new Vector2(Mathf.Cos(adjustedAngle), Mathf.Sin(adjustedAngle));
         rigidbody.velocity += newVelocity;
         showActualSize = true;
+        // !!!!!!!!!!!!!!!!!!!!!!!! UNCHILD SO THAT IT FLIES STRAIGHT !!!!!!!!!!!!!!!!!!
+        transform.parent = null;
         planetLandedOn = null;
     }
 

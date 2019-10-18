@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
 
     public Vector3 rocketStartingPosition;
-    public Vector3 exitPlanetPosition;
+    public Vector3 planetPosition;
+    public Vector3[] asteroidStartingPositions;
 
     public CameraController mainCameraController;
     public InputController inputController;
@@ -21,13 +23,23 @@ public class GameController : MonoBehaviour
 
     public GameObject rocketGObject;
     public GameObject blackHoleGObject;
-    public GameObject exitPlanetGObject;
+    public List<GameObject> planetGObjects;
+    public List<GameObject> asteroidGObjects;
 
     public Canvas screenOverlayCanvas;
 
+    public int launches;
+
+
+    // 1 is normal speed, 0.5 is half speed. I love Unity.
+    public float timeScale;
+
     private RocketController rocketController;
     private BlackHoleController blackHoleController;
-    private PlanetController exitPlanetController;
+
+    private List<GameObject> claimedAsteroids;
+
+    private GameObject lastSafeLanding;
 
     public bool inPlay;
     // when true, shot statistics are displayed under the finger during gesture
@@ -38,7 +50,15 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // God I love Unity
+        Time.timeScale = timeScale;
+
         inPlay = false;
+        lastSafeLanding = new GameObject("Starting Position");
+        lastSafeLanding.transform.position = rocketStartingPosition;
+
+        claimedAsteroids = new List<GameObject>();
+
         SetCameraFollowMode(CameraMode.Neutral);
         SetOxygenMode(OxygenMode.Safe);
 
@@ -56,9 +76,38 @@ public class GameController : MonoBehaviour
         rocketGObject = Instantiate(rocketPrefab, rocketStartingPosition, Quaternion.Euler(0, 0, 0));
         rocketController = rocketGObject.GetComponent<RocketController>();
 
-        exitPlanetGObject = Instantiate(planetPrefab, exitPlanetPosition, Quaternion.Euler(0, 0, 0));
-        exitPlanetController = exitPlanetGObject.GetComponent<PlanetController>();
-        exitPlanetController.gameController = this;
+        MakeNewPlanet(planetPosition);
+
+        foreach (Vector3 position in asteroidStartingPositions)
+        {
+            MakeNewAsteroid(position);
+        }
+    }
+
+    private GameObject MakeNewPlanet(Vector3 position)
+    {
+        if (planetGObjects == null)
+        {
+            planetGObjects = new List<GameObject>();
+        }
+
+        var planet = Instantiate(planetPrefab, position, Quaternion.Euler(0, 0, 0));
+        planet.GetComponent<PlanetController>().gameController = this;
+        planetGObjects.Add(planet);
+        return planet;
+    }
+
+    private GameObject MakeNewAsteroid(Vector3 position)
+    {
+        if (asteroidGObjects == null)
+        {
+            asteroidGObjects = new List<GameObject>();
+        }
+
+        var asteroid = Instantiate(asteroidPrefab, position, Quaternion.Euler(0, 0, 0));
+        asteroid.GetComponent<AsteroidController>().gameController = this;
+        asteroidGObjects.Add(asteroid);
+        return asteroid;
     }
 
     void Update()
@@ -89,31 +138,69 @@ public class GameController : MonoBehaviour
     {
         if (thing.tag == "Player")
         {
-            GameOver();
+            if (thing.GetComponent<RocketController>().isSafe) return;
+
+            FlightFailed();
             rocketController = null;
         }
 
         Destroy(thing);
     }
 
-    internal void LandOnPlanet(GameObject planet)
+    internal void RocketLandOn(GameObject body)
     {
         inPlay = false;
         SetCameraFollowMode(CameraMode.Neutral);
-        rocketController.LandOn(planet);
-        SetOxygenMode(OxygenMode.Safe); //TODO: fix me
+        rocketController.LandOn(body);
+
+        if (body.tag == "Planet")
+        {
+            Terraform();
+            SetOxygenMode(OxygenMode.Safe);
+            lastSafeLanding = body;
+        }
+        else
+        {
+            body.GetComponent<AsteroidController>().RaiseFlag();
+            claimedAsteroids.Add(body);
+            SetOxygenMode(OxygenMode.Landed);
+        }
     }
 
-    private void GameOver()
+    private void Terraform()
     {
-        inPlay = false;
-        Debug.Log("Game Over!");
+        foreach (GameObject asteroid in claimedAsteroids)
+        {
+            MakeNewPlanet(asteroid.transform.position).GetComponent<PlanetController>().Replace(asteroid);
+            asteroidGObjects.Remove(asteroid);
+        }
+
+        claimedAsteroids.Clear();
+
+        if (asteroidGObjects.Count == 0)
+        {
+            GameWon();
+        }
+    }
+
+    private void GameWon()
+    {
+        Debug.LogWarning("YOU WON!");
+    }
+
+    private void FlightFailed()
+    {
+        rocketController.LandOn(lastSafeLanding);
+        SetOxygenMode(OxygenMode.Safe);
+        claimedAsteroids.Clear();
     }
 
     private void ShootRocket(float angle, int power) 
     {
         inPlay = true; // starts gravity
         displayStatistics = false;
+        launches++;
+
         rocketController.LaunchRocket(angle, power);
         SetCameraFollowMode(CameraMode.FollowRocket);
         SetOxygenMode(OxygenMode.Flying);
@@ -159,6 +246,7 @@ public class GameController : MonoBehaviour
         {
             ShotCancelled();
         }
+
         statsController.ResetFields();
     }
 
@@ -179,6 +267,6 @@ public class GameController : MonoBehaviour
     internal void OutOfOxygen()
     {
         Debug.Log("Out of Oxygen!");
-        GameOver();
+        FlightFailed();
     }
 }
