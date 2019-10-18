@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
 
     public GameObject cameraAngleButton;
     public StatsController statsController;
+    public OxygenMeterConroller oxygenMeterConroller;
 
     public GameObject rocketGObject;
     public GameObject blackHoleGObject;
@@ -38,6 +39,7 @@ public class GameController : MonoBehaviour
     {
         inPlay = false;
         SetCameraFollowMode(CameraMode.Neutral);
+        SetOxygenMode(OxygenMode.Safe);
 
         canvasWidth = screenOverlayCanvas.GetComponent<RectTransform>().rect.width;
         canvasHeight = screenOverlayCanvas.GetComponent<RectTransform>().rect.height;
@@ -98,6 +100,7 @@ public class GameController : MonoBehaviour
         inPlay = false;
         SetCameraFollowMode(CameraMode.Neutral);
         rocketController.LandOn(planet);
+        SetOxygenMode(OxygenMode.Safe); //TODO: fix me
     }
 
     private void GameOver()
@@ -112,6 +115,12 @@ public class GameController : MonoBehaviour
         displayStatistics = false;
         rocketController.LaunchRocket(angle, power);
         SetCameraFollowMode(CameraMode.FollowRocket);
+        SetOxygenMode(OxygenMode.Flying);
+    }
+
+    private void SetOxygenMode(OxygenMode mode)
+    {
+        oxygenMeterConroller.mode = mode;
     }
 
     private void AimRocketAtAngle(float angle)
