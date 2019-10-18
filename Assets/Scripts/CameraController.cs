@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum CameraMode
 {
-    Neutral, FollowRocket
+    Neutral, FollowRocket, StayPut
 }
 
 public class CameraController : MonoBehaviour
@@ -19,7 +19,9 @@ public class CameraController : MonoBehaviour
 
     public Vector3 offsetFromCenter;
 
-    public float mapX, mapY, minX, maxX, minY, maxY;
+    public float mapX, mapY;
+    
+    private float minX, maxX, minY, maxY;
 
     private Camera camera;
 
@@ -48,6 +50,8 @@ public class CameraController : MonoBehaviour
 
        switch (mode)
         {
+            case CameraMode.StayPut:
+                return;
             case CameraMode.FollowRocket:
                 focus = gameController.CurrentRocketPosition();
                 size = followSize;

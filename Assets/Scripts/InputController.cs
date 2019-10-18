@@ -1,24 +1,38 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
-public class InputController : MonoBehaviour
+/// <summary>
+/// A form of method which will be used in GestureEvents, ie
+/// {
+///     ...
+///     InputController controller = (some instance);
+///     contoller.whenUpdated += OnGestureUpdatedMethod;
+///     contoller.whenUpdated += AlsoDoThisOnUpdateMethod;
+///     ...
+///  }
+/// .
+/// .
+/// .
+/// private OnGestureUpdatedMethod(InputConstants constants) {
+///  ...do something here with the constants which are the full state of the input controller
+/// }
+/// .
+/// .
+/// .
+/// private AlsoDoThisOnUpdateMethod(InputConstants constants) {
+///  ...do something here with the constants which are the full state of the input controller
+/// }
+/// </summary>
+/// <param name="constants"></param>
+public delegate void GestureEventDelegate(InputConstants constants);
+
+/// <summary>
+/// A class which only serves to store some values and pass them safely.
+/// Contains the full state of an input contoller so that it may be passed safely
+/// </summary>
+public class InputConstants
 {
-    // game controller to report events to
-    public GameController game;
-
-    // statistics text game object...
-    public GameObject statsGObject;
-    // ...and text
-    private Text statsText;
-
     // current simplified gesture phase, (Began, Moved, Ended only)
     public TouchPhase currentPhase;
-
-    // pixels dragged in the y to increase power one step
-    public int unitsYPerPower;
-    // degrees to increase for each pixel dragged in the x
-    public float degreesPerUnitX;
 
     // computed current gesture power (0 when currentPhase is Ended)
     public int gesturePower;
@@ -29,15 +43,75 @@ public class InputController : MonoBehaviour
     public Vector3 gestureStartPosition;
     // computed current gesture delta from first touch (Vector3.zero when currentPhase is Ended)
     public Vector3 gestureDelta;
+    // current gesture position
+    public Vector3 gesturePosition;
+
+    public Vector3 cameraOffset;
+
+    public InputConstants() 
+    {
+        currentPhase = TouchPhase.Ended;
+        gestureStartPosition = Vector3.zero;
+        gestureDelta = Vector3.zero;
+        gesturePower = 0;
+        gestureZAngleOffset = 0;
+        cameraOffset = Vector3.zero;
+    }
+
+    private InputConstants(
+        TouchPhase currentPhase, 
+        int gesturePower, 
+        float gestureZAngleOffset, 
+        Vector3 gestureStartPosition, 
+        Vector3 gestureDelta, 
+        Vector3 gesturePosition, 
+        Vector3 cameraOffset)
+    {
+        this.currentPhase = currentPhase;
+        this.gesturePower = gesturePower;
+        this.gestureZAngleOffset = gestureZAngleOffset;
+        this.gestureStartPosition = gestureStartPosition;
+        this.gestureDelta = gestureDelta;
+        this.gesturePosition = gesturePosition;
+        this.cameraOffset = cameraOffset;
+    }
+
+    public InputConstants copy()
+    {
+        return new InputConstants(
+            currentPhase, 
+            gesturePower, 
+            gestureZAngleOffset, 
+            gestureStartPosition, 
+            gestureDelta, 
+            gesturePosition, 
+            cameraOffset);
+    }
+}
+
+public class InputController : MonoBehaviour
+{
+    // event: a list of methods to perform, can use +=, -= to add and remove.
+    // in this case, each event only allows methods with type GestureEventDelegate,
+    // then calling the event later on in the script executes all methods in the list
+    // with the parameters I pass to it. Similar to JS callbacks.
+    public event GestureEventDelegate whenUpdated;
+    public event GestureEventDelegate whenEnded;
+
+
+    // pixels dragged in the y to increase power one step
+    public int unitsYPerPower;
+    // degrees to increase for each pixel dragged in the x
+    public float degreesPerUnitX;
+
+    // current state of the input
+    private InputConstants currentState;
 
     // scalar factor * 100 to move camera when peeking around during flight
     public float peekSensitivity;
-    // when true, shot statistics are displayed under the finger during gesture
-    public bool displayStatistics;
 
     private void Start()
     {
-        displayStatistics = true;
         ResetFields();
     }
 
@@ -55,7 +129,7 @@ public class InputController : MonoBehaviour
         if (Input.touches.Length == 0) return; // if no touches, then exit
 
         Touch touch = Input.touches[0];
-        if (currentPhase == TouchPhase.Ended)
+        if (currentState.currentPhase == TouchPhase.Ended)
         {
             OnGestureStart(touch.position);
         }
@@ -95,82 +169,40 @@ public class InputController : MonoBehaviour
     void OnGestureStart(Vector3 startPosition)
     {
         // display rings around rocket, display touch point
-        currentPhase = TouchPhase.Began;
-        gestureStartPosition = startPosition;
+        currentState.currentPhase = TouchPhase.Began;
+        currentState.gestureStartPosition = startPosition;
+        currentState.gesturePosition = startPosition;
 
         UpdateGestureProperties(startPosition);
     }
 
     void OnGestureDrag(Vector3 currentPosition)
     {
-        currentPhase = TouchPhase.Moved;
-        gestureDelta = gestureStartPosition - currentPosition;
+        currentState.currentPhase = TouchPhase.Moved;
+        currentState.gestureDelta = currentState.gestureStartPosition - currentPosition;
+        currentState.gesturePosition = currentPosition;
 
         UpdateGestureProperties(currentPosition);
     }
 
     void OnGestureRelease()
     {
-        game.GestureEnded(this);
+        whenEnded(currentState.copy());
 
         ResetFields();
     }
 
     private void ResetFields()
     {
-        currentPhase = TouchPhase.Ended;
-        gestureStartPosition = Vector3.zero;
-        gestureDelta = Vector3.zero;
-        gesturePower = 0;
-        gestureZAngleOffset = 0;
-
-        statsGObject.SetActive(false);
-        if (statsText == null)
-        {
-            statsText = statsGObject.GetComponent<Text>();
-        }
-        statsText.text = "Stats Text\nStats Text 2";
+        currentState = new InputConstants();
     }
 
     private void UpdateGestureProperties(Vector3 position)
     {
-        gesturePower = (int)Mathf.Clamp(gestureDelta.y / unitsYPerPower + 2, 0, 3);
-        gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * gestureDelta.x, -180, 180);
+        currentState.gesturePower = (int)Mathf.Clamp(currentState.gestureDelta.y / unitsYPerPower + 2, 0, 3);
+        currentState.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * currentState.gestureDelta.x, -360, 360);
+        currentState.cameraOffset = currentState.gestureDelta * Mathf.Clamp(peekSensitivity / 100, 0.01f, 2.5f);
 
-        game.GestureUpdated(this);
-
-        if (displayStatistics)
-        {
-            DisplayShotStatistics(position);
-        }
-    }
-
-    private void DisplayShotStatistics(Vector3 position)
-    {
-        statsGObject.SetActive(true);
-        // TODO: maybe later add invisible game object at touch position, child statsGObject to it here
-        statsGObject.transform.position = position + new Vector3(0, 20, 0);
-
-        var newPos = statsGObject.transform.position;
-
-        // weird units here, hence the *2 and the *4, though I'm not sure why...
-
-        // clamp the object so that it can't be offscreen in the x direction...
-        float halfWidth = statsGObject.GetComponent<RectTransform>().rect.width / 2;
-        newPos.x = Mathf.Clamp(newPos.x, halfWidth, game.GetOverlayCanvasWidth() - halfWidth * 2);
-
-        // ... or the y direction
-        float halfHeight = statsGObject.GetComponent<RectTransform>().rect.height / 2;
-        newPos.y = Mathf.Clamp(newPos.y, halfHeight, game.GetOverlayCanvasHeight() - 4 * halfHeight);
-
-        statsGObject.transform.position = newPos;
-
-        // set the text
-        statsText.text = (gesturePower > 0) ?
-            string.Format("Power Level: {0}\nAngle: {1}",
-                gesturePower,
-                (int)gestureZAngleOffset
-            ) :
-            "Cancel\nShot";
+        whenUpdated(currentState.copy());
     }
 }
