@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Black Hole
-  - Exit Planet
+  - Planet
+  - Asteroid
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Black Hole
   - 
   - Asteroids
-  - Exit Planet
+  - Planet
   - Rocket
   - 
   - 
@@ -52,7 +53,7 @@ TagManager:
   - name: Items
     uniqueID: 3332895023
     locked: 0
-  - name: Goal
+  - name: Planet
     uniqueID: 3014741755
     locked: 0
   - name: Player

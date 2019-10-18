@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ExitPlanetController : MonoBehaviour
+public class PlanetController : MonoBehaviour
 {
 
     public GameController gameController;

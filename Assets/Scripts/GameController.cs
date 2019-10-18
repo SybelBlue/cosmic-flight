@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 
     private RocketController rocketController;
     private BlackHoleController blackHoleController;
-    private ExitPlanetController exitPlanetController;
+    private PlanetController exitPlanetController;
 
     public bool inPlay;
     // when true, shot statistics are displayed under the finger during gesture
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
         rocketController = rocketGObject.GetComponent<RocketController>();
 
         exitPlanetGObject = Instantiate(exitPlanetPrefab, exitPlanetPosition, Quaternion.Euler(0, 0, 0));
-        exitPlanetController = exitPlanetGObject.GetComponent<ExitPlanetController>();
+        exitPlanetController = exitPlanetGObject.GetComponent<PlanetController>();
         exitPlanetController.gameController = this;
     }
 
