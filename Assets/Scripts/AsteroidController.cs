@@ -3,7 +3,7 @@
 public class AsteroidController : MonoBehaviour
 {
     public GameController gameController;
-    public GameObject flag;
+    public FlagController flagController;
 
     private void Start()
     {
@@ -21,11 +21,11 @@ public class AsteroidController : MonoBehaviour
 
     internal void RaiseFlag()
     {
-        Debug.Log("Raised flag on " + this);
+        flagController.SetRaised(true);
     }
 
     internal void LowerFlag()
     {
-        Debug.Log("Lowered flag on " + this);
+        flagController.SetRaised(false);
     }
 }

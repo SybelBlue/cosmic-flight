@@ -12,7 +12,7 @@ public class OxygenMeterConroller : MonoBehaviour
     public GameController gameController;
     public Text label;
     public OxygenMode mode;
-    public float flyBurnRate, asteroidLandedBurnRate, target;
+    public float flyBurnRate, asteroidLandedBurnRate, claimCost, target;
     public Color highO2Color, mediumO2Color, lowO2Color;
     private Slider slider;
 
@@ -62,14 +62,8 @@ public class OxygenMeterConroller : MonoBehaviour
         
     }
 
-    /// <summary>
-    /// Sets the O2 meter to fill level between 0 and 100.
-    /// </summary>
-    /// <param name="f"> Between 0 and 1 </param>
-    internal void SetSliderValue(float f)
+    internal void ClaimAsteroid()
     {
-        target = f;
+        target -= claimCost;
     }
-
-
 }

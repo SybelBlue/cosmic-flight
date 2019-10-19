@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// A form of method which will be used in GestureEvents, ie
@@ -98,6 +99,7 @@ public class InputController : MonoBehaviour
     public event GestureEventDelegate whenUpdated;
     public event GestureEventDelegate whenEnded;
 
+    public bool acceptingInputs;
 
     // pixels dragged in the y to increase power one step
     public int unitsYPerPower;
@@ -112,12 +114,16 @@ public class InputController : MonoBehaviour
 
     private void Start()
     {
+        acceptingInputs = true;
         ResetFields();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // https://answers.unity.com/questions/784617/how-do-i-block-touch-events-from-propagating-throu.html
+        if (!acceptingInputs || EventSystem.current.IsPointerOverGameObject()) return;
+
         CheckForTouches();
 
         CheckForClicks();

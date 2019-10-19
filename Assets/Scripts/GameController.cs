@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public GameObject cameraAngleButton;
     public StatsController statsController;
     public OxygenMeterConroller oxygenMeterConroller;
+    public GameObject relaunchButton;
 
     public GameObject rocketGObject;
     public GameObject blackHoleGObject;
@@ -110,10 +111,21 @@ public class GameController : MonoBehaviour
         return asteroid;
     }
 
+    public void Pause()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void Play()
+    {
+        Time.timeScale = timeScale;
+    }
+
     void Update()
     {
+        relaunchButton.SetActive(inPlay);
+
         // Do nothing if not in play
-        cameraAngleButton.SetActive(inPlay);
         if (!inPlay) return;
 
         Vector3 force = blackHoleController.GetGravitationalForce(rocketGObject.transform.position);
@@ -141,7 +153,7 @@ public class GameController : MonoBehaviour
             if (thing.GetComponent<RocketController>().isSafe) return;
 
             FlightFailed();
-            rocketController = null;
+            return;
         }
 
         Destroy(thing);
@@ -164,6 +176,7 @@ public class GameController : MonoBehaviour
             body.GetComponent<AsteroidController>().RaiseFlag();
             claimedAsteroids.Add(body);
             SetOxygenMode(OxygenMode.Landed);
+            oxygenMeterConroller.ClaimAsteroid();
         }
     }
 
@@ -188,10 +201,12 @@ public class GameController : MonoBehaviour
         Debug.LogWarning("YOU WON!");
     }
 
-    private void FlightFailed()
+    public void FlightFailed()
     {
+        inPlay = false;
         rocketController.LandOn(lastSafeLanding);
         SetOxygenMode(OxygenMode.Safe);
+        claimedAsteroids.ForEach(asteroid => asteroid.GetComponent<AsteroidController>().LowerFlag());
         claimedAsteroids.Clear();
     }
 
@@ -268,5 +283,10 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Out of Oxygen!");
         FlightFailed();
+    }
+
+    internal void SetAllowInputs(bool value)
+    {
+        inputController.acceptingInputs = value;
     }
 }

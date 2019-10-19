@@ -17,7 +17,7 @@ public class PlanetController : MonoBehaviour
             return;
         }
 
-        transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1), 0.4f);
+        transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1, 1), 0.15f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
