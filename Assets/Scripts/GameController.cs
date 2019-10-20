@@ -187,10 +187,13 @@ public class GameController : MonoBehaviour
     {
         foreach (GameObject asteroid in claimedAsteroids)
         {
-            MakeNewPlanet(asteroid.transform.position).GetComponent<PlanetController>().Replace(asteroid);
+            // make new planet has planetCounter++
+            var planet = MakeNewPlanet(asteroid.transform.position); 
+            planetGObjects.Add(planet);
+
+            planet.GetComponent<PlanetController>().Replace(asteroid);
             asteroidGObjects.Remove(asteroid);
             asteroidCounter--;
-            planetCounter++;
         }
 
         claimedAsteroids.Clear();

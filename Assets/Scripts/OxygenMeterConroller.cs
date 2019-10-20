@@ -14,28 +14,25 @@ public class OxygenMeterConroller : MonoBehaviour
     public OxygenMode mode;
     public float flyBurnRate, asteroidLandedBurnRate, claimCost, target;
     public Color highO2Color, mediumO2Color, lowO2Color;
-    private Slider slider;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        slider = GetComponentInChildren<Slider>();
-    }
+    public Slider mainSlider, redSlider;
 
     void Update()
     {
         target = GetTarget(mode);
-        slider.value = Mathf.Lerp(slider.value, 
-            target, 
+        mainSlider.value = Mathf.Lerp(mainSlider.value,
+            target,
+            mode == OxygenMode.Safe ? 0.2f : 0.9f);
+        redSlider.value = Mathf.Lerp(redSlider.value,
+            target,
             mode == OxygenMode.Safe ? 0.2f : 0.5f);
 
-        if (slider.value < 0.2f)
+        if (mainSlider.value < 0.2f)
         {
             gameController.OutOfOxygen();
         }
 
-        label.text = String.Format("O2: {0}%", Mathf.RoundToInt(slider.value));
-        label.color = Color.Lerp(label.color, GetLabelColor(slider.value / slider.maxValue), 0.4f);
+        label.text = String.Format("O2: {0}%", Mathf.RoundToInt(mainSlider.value));
+        label.color = Color.Lerp(label.color, GetLabelColor(mainSlider.value / mainSlider.maxValue), 0.4f);
     }
 
     private Color GetLabelColor(float value)
