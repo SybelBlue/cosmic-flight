@@ -7,7 +7,7 @@ public enum OxygenMode
     Safe, Flying, Landed
 }
 
-public class OxygenMeterConroller : MonoBehaviour
+public class OxygenMeterController : MonoBehaviour
 {
     public GameController gameController;
     public Text label;

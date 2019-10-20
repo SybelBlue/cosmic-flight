@@ -2799,7 +2799,7 @@ MonoBehaviour:
     type: 3}
   cameraAngleButton: {fileID: 585265120}
   statsController: {fileID: 428525991}
-  oxygenMeterConroller: {fileID: 186531820}
+  oxygenMeterController: {fileID: 186531820}
   relaunchButton: {fileID: 1599080561}
   launchCounter: {fileID: 110725048}
   asteroidCounter: {fileID: 2095491236}

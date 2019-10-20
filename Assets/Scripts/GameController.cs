@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
 
     public GameObject cameraAngleButton;
     public StatsController statsController;
-    public OxygenMeterConroller oxygenMeterConroller;
+    public OxygenMeterController oxygenMeterController;
     public GameObject relaunchButton;
     public CounterController launchCounter, asteroidCounter, planetCounter;
 
@@ -129,7 +129,7 @@ public class GameController : MonoBehaviour
         Time.timeScale = timeScale;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         relaunchButton.SetActive(inPlay);
 
@@ -138,11 +138,6 @@ public class GameController : MonoBehaviour
 
         Vector3 force = blackHoleController.GetGravitationalForce(rocketGObject.transform.position);
         rocketController.ApplyGravitationalForce(force);
-
-        if (!mainCameraController.InMapBounds(rocketGObject.transform.position))
-        {
-            FlightFailed();
-        }
     }
 
     public void ToggleCameraFollowMode()
@@ -190,7 +185,7 @@ public class GameController : MonoBehaviour
             body.GetComponent<AsteroidController>().RaiseFlag();
             claimedAsteroids.Add(body);
             SetOxygenMode(OxygenMode.Landed);
-            oxygenMeterConroller.ClaimAsteroid();
+            oxygenMeterController.ClaimAsteroid();
         }
     }
 
@@ -246,7 +241,7 @@ public class GameController : MonoBehaviour
 
     private void SetOxygenMode(OxygenMode mode)
     {
-        oxygenMeterConroller.mode = mode;
+        oxygenMeterController.mode = mode;
     }
 
     private void AimRocketAtAngle(float angle)
