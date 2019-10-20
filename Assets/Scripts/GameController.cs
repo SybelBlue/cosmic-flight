@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     public StatsController statsController;
     public OxygenMeterConroller oxygenMeterConroller;
     public GameObject relaunchButton;
+    public CounterController launchCounter, asteroidCounter, planetCounter;
 
     public GameObject rocketGObject;
     public GameObject blackHoleGObject;
@@ -28,8 +29,6 @@ public class GameController : MonoBehaviour
     public List<GameObject> asteroidGObjects;
 
     public Canvas screenOverlayCanvas;
-
-    public int launches;
 
 
     // 1 is normal speed, 0.5 is half speed. I love Unity.
@@ -95,6 +94,8 @@ public class GameController : MonoBehaviour
         var planet = Instantiate(planetPrefab, position, Quaternion.Euler(0, 0, 0));
         planet.GetComponent<PlanetController>().gameController = this;
         planetGObjects.Add(planet);
+        planetCounter++;
+
         return planet;
     }
 
@@ -108,6 +109,8 @@ public class GameController : MonoBehaviour
         var asteroid = Instantiate(asteroidPrefab, position, Quaternion.Euler(0, 0, 0));
         asteroid.GetComponent<AsteroidController>().gameController = this;
         asteroidGObjects.Add(asteroid);
+        asteroidCounter++;
+
         return asteroid;
     }
 
@@ -186,6 +189,8 @@ public class GameController : MonoBehaviour
         {
             MakeNewPlanet(asteroid.transform.position).GetComponent<PlanetController>().Replace(asteroid);
             asteroidGObjects.Remove(asteroid);
+            asteroidCounter--;
+            planetCounter++;
         }
 
         claimedAsteroids.Clear();
@@ -214,7 +219,7 @@ public class GameController : MonoBehaviour
     {
         inPlay = true; // starts gravity
         displayStatistics = false;
-        launches++;
+        launchCounter++;
 
         rocketController.LaunchRocket(angle, power);
         SetCameraFollowMode(CameraMode.FollowRocket);

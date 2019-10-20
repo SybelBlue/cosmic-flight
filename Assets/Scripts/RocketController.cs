@@ -111,6 +111,8 @@ public class RocketController : MonoBehaviour
 
     internal void LandOn(GameObject planet)
     {
+        if (planetToLandOn != null) return;
+
         // loose all speed, end flight
         rigidbody.velocity = Vector3.zero;
         showActualSize = false;
