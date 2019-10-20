@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum CameraMode
 {
-    Neutral, FollowRocket, StayPut//, Cinematic
+    Neutral, FollowRocket, StayPut
 }
 
 public class CameraController : MonoBehaviour
@@ -24,11 +24,6 @@ public class CameraController : MonoBehaviour
     private float minX, maxX, minY, maxY;
 
     private Camera camera;
-
-    //private Vector3 cinematicPosition;
-    //private float cinematicSize;
-    //private CameraMode lastMode;
-    //private Action cinematicCallback;
 
     private void Start()
     {
@@ -64,10 +59,6 @@ public class CameraController : MonoBehaviour
                 focus = neutralPosition;
                 size = neutralSize;
                 break;
-            //case CameraMode.Cinematic:
-            //    focus = cinematicPosition;
-            //    size = cinematicSize;
-            //    break;
             default:
                 focus = neutralPosition;
                 size = neutralSize;
@@ -93,31 +84,15 @@ public class CameraController : MonoBehaviour
         if ((transform.position - position).sqrMagnitude > 0.2f) return;
 
         transform.position = position;
-
-        //if (mode == CameraMode.Cinematic)
-        //{
-        //    mode = CameraMode.StayPut;
-        //    StartCoroutine(CinematicPositionReached());
-        //}
     }
 
-    //internal void CinematicFocusOn(Vector3 position, float size, Action callback)
-    //{
-    //    lastMode = mode;
-    //    mode = CameraMode.Cinematic;
-    //    cinematicPosition = position;
-    //    cinematicSize = size;
-    //    cinematicCallback = callback;
-    //    gameController.SetAllowInputs(false);
-    //    gameController.Pause();
-    //}
-
-    //private IEnumerator CinematicPositionReached()
-    //{
-    //    yield return new WaitForSeconds(1);
-    //    mode = lastMode;
-    //    gameController.SetAllowInputs(true);
-    //    gameController.Play();
-    //    cinematicCallback();
-    //}
+    internal bool InMapBounds(Vector3 position)
+    {
+        // Calculations assume map is position at the origin
+        var minX = -mapX / 2.0f;
+        var maxX = mapX / 2.0f;
+        var minY = -mapY / 2.0f;
+        var maxY = mapY / 2.0f;
+        return minX <= position.x && position.x <= maxX && minY <= position.y && position.y <= maxY;
+    }
 }

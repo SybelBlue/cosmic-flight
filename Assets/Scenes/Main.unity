@@ -601,9 +601,9 @@ MonoBehaviour:
   asteroidLandedBurnRate: 3
   claimCost: 0
   target: 0
-  highO2Color: {r: 0, g: 0, b: 0, a: 0}
-  mediumO2Color: {r: 0, g: 0, b: 0, a: 0}
-  lowO2Color: {r: 0, g: 0, b: 0, a: 0}
+  highO2Color: {r: 0.16273692, g: 0.5849056, b: 0.046902817, a: 0.50980395}
+  mediumO2Color: {r: 0.8679245, g: 0.79831046, b: 0.24973297, a: 0.83137256}
+  lowO2Color: {r: 0.8301887, g: 0.34069067, b: 0.34069067, a: 1}
   mainSlider: {fileID: 1353467682}
   redSlider: {fileID: 313294554}
 --- !u!1 &209000527
@@ -1306,10 +1306,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 797221461}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: [{m_Target: {fileID: 797221463}, m_MethodName: OnClick, m_Mode: 1,
-          m_Arguments: {m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: 'UnityEngine.Object,
-              UnityEngine', m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: '',
-            m_BoolArgument: 0}, m_CallState: 2}]
+      m_Calls:
+      - m_Target: {fileID: 797221463}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &797221461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2776,7 +2784,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketStartingPosition: {x: -60, y: -60, z: 0}
   planetPosition: {x: 60, y: -60, z: 0}
-  asteroidStartingPositions: [{x: -60, y: 60, z: 0}, {x: 60, y: 60, z: 0}]
+  asteroidStartingPositions:
+  - {x: -60, y: 60, z: 0}
+  - {x: 60, y: 60, z: 0}
   mainCameraController: {fileID: 519420030}
   inputController: {fileID: 2119872604}
   rocketPrefab: {fileID: 2794735893918823343, guid: 590311b7672eb8346a2896b26126bb14,
@@ -2830,6 +2840,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rings: {fileID: 1657838738}
+  displayRings: 0
   acceptingInputs: 0
   unitsYPerPower: 50
   degreesPerUnitX: 1.2

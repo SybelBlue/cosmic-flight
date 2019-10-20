@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
         Time.timeScale = timeScale;
 
         inPlay = false;
+        inputController.displayRings = true;
         lastSafeLanding = new GameObject("Starting Position");
         lastSafeLanding.transform.position = rocketStartingPosition;
 
@@ -137,6 +138,11 @@ public class GameController : MonoBehaviour
 
         Vector3 force = blackHoleController.GetGravitationalForce(rocketGObject.transform.position);
         rocketController.ApplyGravitationalForce(force);
+
+        if (!mainCameraController.InMapBounds(rocketGObject.transform.position))
+        {
+            FlightFailed();
+        }
     }
 
     public void ToggleCameraFollowMode()
@@ -171,6 +177,7 @@ public class GameController : MonoBehaviour
         inPlay = false;
         SetCameraFollowMode(CameraMode.Neutral);
         rocketController.LandOn(body);
+        inputController.displayRings = true;
 
         if (body.tag == "Planet")
         {
@@ -222,12 +229,14 @@ public class GameController : MonoBehaviour
         SetOxygenMode(OxygenMode.Safe);
         claimedAsteroids.ForEach(asteroid => asteroid.GetComponent<AsteroidController>().LowerFlag());
         claimedAsteroids.Clear();
+        inputController.displayRings = true;
     }
 
     private void ShootRocket(float angle, int power) 
     {
         inPlay = true; // starts gravity
         displayStatistics = false;
+        inputController.displayRings = false;
         launchCounter++;
 
         rocketController.LaunchRocket(angle, power);

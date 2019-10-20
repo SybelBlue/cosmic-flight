@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
@@ -100,6 +101,7 @@ public class InputController : MonoBehaviour
     public event GestureEventDelegate whenEnded;
 
     public GameObject rings;
+    public bool displayRings;
 
     public bool acceptingInputs;
 
@@ -181,9 +183,12 @@ public class InputController : MonoBehaviour
         currentState.gestureStartPosition = startPosition;
         currentState.gesturePosition = startPosition;
 
-        rings.SetActive(true);
-        rings.transform.position = startPosition + unitsYPerPower * 2 * Vector3.up;
-        rings.transform.localScale = (2f * unitsYPerPower) / 100f * new Vector3(1, 1);
+        if (displayRings)
+        {
+            rings.SetActive(true);
+            rings.transform.position = startPosition + unitsYPerPower * 2 * Vector3.up;
+            rings.transform.localScale = (2f * unitsYPerPower) / 100f * new Vector3(1, 1);
+        }
 
         UpdateGestureProperties(startPosition);
     }
@@ -218,7 +223,7 @@ public class InputController : MonoBehaviour
         int oldPower = currentState.gesturePower;
         currentState.gesturePower = (int)Mathf.Clamp(currentState.gestureDelta.y / unitsYPerPower + 2, 0, 3);
 
-        if (oldPower != currentState.gesturePower)
+        if (oldPower != currentState.gesturePower && displayRings)
         {
             Handheld.Vibrate();
         }
