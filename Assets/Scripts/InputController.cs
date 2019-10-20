@@ -99,6 +99,8 @@ public class InputController : MonoBehaviour
     public event GestureEventDelegate whenUpdated;
     public event GestureEventDelegate whenEnded;
 
+    public GameObject rings;
+
     public bool acceptingInputs;
 
     // pixels dragged in the y to increase power one step
@@ -179,6 +181,10 @@ public class InputController : MonoBehaviour
         currentState.gestureStartPosition = startPosition;
         currentState.gesturePosition = startPosition;
 
+        rings.SetActive(true);
+        rings.transform.position = startPosition + unitsYPerPower * 2 * Vector3.up;
+        rings.transform.localScale = (2f * unitsYPerPower) / 100f * new Vector3(1, 1);
+
         UpdateGestureProperties(startPosition);
     }
 
@@ -201,11 +207,22 @@ public class InputController : MonoBehaviour
     private void ResetFields()
     {
         currentState = new InputConstants();
+
+        rings.transform.position = Vector3.zero;
+        rings.transform.localScale = new Vector3(1, 1);
+        rings.SetActive(false);
     }
 
     private void UpdateGestureProperties(Vector3 position)
     {
+        int oldPower = currentState.gesturePower;
         currentState.gesturePower = (int)Mathf.Clamp(currentState.gestureDelta.y / unitsYPerPower + 2, 0, 3);
+
+        if (oldPower != currentState.gesturePower)
+        {
+            Handheld.Vibrate();
+        }
+
         currentState.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * currentState.gestureDelta.x, -360, 360);
         currentState.cameraOffset = currentState.gestureDelta * Mathf.Clamp(peekSensitivity / 100, 0.01f, 2.5f);
 

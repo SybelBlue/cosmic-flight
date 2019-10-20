@@ -170,9 +170,9 @@ public class GameController : MonoBehaviour
 
         if (body.tag == "Planet")
         {
+            lastSafeLanding = body;
             Terraform();
             SetOxygenMode(OxygenMode.Safe);
-            lastSafeLanding = body;
         }
         else
         {
@@ -198,7 +198,7 @@ public class GameController : MonoBehaviour
 
         claimedAsteroids.Clear();
 
-        if (asteroidGObjects.Count == 0)
+        if (asteroidGObjects.Count == 0 && lastSafeLanding.tag == "Planet")
         {
             GameWon();
         }
