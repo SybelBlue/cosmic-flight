@@ -455,11 +455,11 @@ MonoBehaviour:
   mode: 0
   flyBurnRate: 8
   asteroidLandedBurnRate: 3
-  claimCost: 20
+  claimCost: 0
   target: 0
-  highO2Color: {r: 0.26711303, g: 0.5660378, b: 0.056069776, a: 0.42745098}
-  mediumO2Color: {r: 0.735849, g: 0.7109314, b: 0.38527945, a: 0.42745098}
-  lowO2Color: {r: 0.8396226, g: 0.24951048, b: 0.27812195, a: 1}
+  highO2Color: {r: 0, g: 0, b: 0, a: 0}
+  mediumO2Color: {r: 0, g: 0, b: 0, a: 0}
+  lowO2Color: {r: 0, g: 0, b: 0, a: 0}
   mainSlider: {fileID: 1353467682}
   redSlider: {fileID: 313294554}
 --- !u!1 &209000527
@@ -1023,13 +1023,14 @@ GameObject:
   - component: {fileID: 797221462}
   - component: {fileID: 797221461}
   - component: {fileID: 797221460}
-  m_Layer: 5
+  - component: {fileID: 797221463}
+  m_Layer: 0
   m_Name: RetryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &797221459
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1048,7 +1049,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 30}
+  m_SizeDelta: {x: 300, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &797221460
 MonoBehaviour:
@@ -1089,7 +1090,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 797221461}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 797221463}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &797221461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,6 +1137,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797221458}
   m_CullTransparentMesh: 0
+--- !u!114 &797221463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797221458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61df99dcf7fa94b99ad385c0e78af6f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &997707444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,7 +2271,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -40, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031692565
 MonoBehaviour:
@@ -2271,7 +2295,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 4
@@ -2280,7 +2304,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Restart Level
 --- !u!222 &2031692566
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2423,9 +2447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketStartingPosition: {x: -60, y: -60, z: 0}
   planetPosition: {x: 60, y: -60, z: 0}
-  asteroidStartingPositions:
-  - {x: 60, y: 60, z: 0}
-  - {x: -60, y: 60, z: 0}
+  asteroidStartingPositions: []
   mainCameraController: {fileID: 519420030}
   inputController: {fileID: 2119872604}
   rocketPrefab: {fileID: 2794735893918823343, guid: 590311b7672eb8346a2896b26126bb14,
@@ -2448,7 +2470,8 @@ MonoBehaviour:
   planetGObjects: []
   asteroidGObjects: []
   screenOverlayCanvas: {fileID: 1415570615}
-  timeScale: 1.5
+  retryButton: {fileID: 797221463}
+  timeScale: 2
   inPlay: 0
   displayStatistics: 0
 --- !u!4 &2119872603
