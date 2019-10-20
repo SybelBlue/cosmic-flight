@@ -7,6 +7,7 @@ TagManager:
   - Black Hole
   - Planet
   - Asteroid
+  - Level Data
   layers:
   - Default
   - TransparentFX

@@ -114,7 +114,7 @@ public class RocketController : MonoBehaviour
         if (planetToLandOn != null) return;
 
         // loose all speed, end flight
-        rigidbody.velocity = Vector3.zero;
+        if (rigidbody != null) rigidbody.velocity = Vector3.zero;
         showActualSize = false;
         
         // aim base at planet

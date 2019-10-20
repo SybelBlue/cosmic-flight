@@ -52,9 +52,10 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadLevelData();
+
         // God I love Unity
         Time.timeScale = timeScale;
-
         inPlay = false;
         inputController.displayRings = true;
         lastSafeLanding = new GameObject("Starting Position");
@@ -87,6 +88,22 @@ public class GameController : MonoBehaviour
         }
 
         retryButton.gameObject.SetActive(false);
+    }
+
+    private void LoadLevelData()
+    {
+        GameObject levelDataObject = GameObject.FindGameObjectWithTag("Level Data");
+        if (levelDataObject == null)
+        {
+            Debug.LogWarning("Level Data Object Not Found!");
+            return;
+        }
+
+        LevelData levelData = levelDataObject.GetComponent<LevelData>();
+
+        this.rocketStartingPosition = levelData.rocketStartingPosition;
+        this.planetPosition = levelData.planetPosition;
+        this.asteroidStartingPositions = levelData.asteroidStartingPostions;
     }
 
     private GameObject MakeNewPlanet(Vector3 position)
