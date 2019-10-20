@@ -1306,18 +1306,10 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 797221461}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 797221463}
-        m_MethodName: OnClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: [{m_Target: {fileID: 797221463}, m_MethodName: OnClick, m_Mode: 1,
+          m_Arguments: {m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: 'UnityEngine.Object,
+              UnityEngine', m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: '',
+            m_BoolArgument: 0}, m_CallState: 2}]
 --- !u!114 &797221461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2784,9 +2776,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketStartingPosition: {x: -60, y: -60, z: 0}
   planetPosition: {x: 60, y: -60, z: 0}
-  asteroidStartingPositions:
-  - {x: -60, y: 60, z: 0}
-  - {x: 60, y: 60, z: 0}
+  asteroidStartingPositions: [{x: -60, y: 60, z: 0}, {x: 60, y: 60, z: 0}]
   mainCameraController: {fileID: 519420030}
   inputController: {fileID: 2119872604}
   rocketPrefab: {fileID: 2794735893918823343, guid: 590311b7672eb8346a2896b26126bb14,
