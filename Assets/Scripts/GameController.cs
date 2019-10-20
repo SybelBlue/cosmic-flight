@@ -30,6 +30,8 @@ public class GameController : MonoBehaviour
 
     public Canvas screenOverlayCanvas;
 
+    public RetryButtonController retryButton;
+
 
     // 1 is normal speed, 0.5 is half speed. I love Unity.
     public float timeScale;
@@ -82,6 +84,8 @@ public class GameController : MonoBehaviour
         {
             MakeNewAsteroid(position);
         }
+
+        retryButton.gameObject.SetActive(false);
     }
 
     private GameObject MakeNewPlanet(Vector3 position)
@@ -207,6 +211,8 @@ public class GameController : MonoBehaviour
     private void GameWon()
     {
         Debug.LogWarning("YOU WON!");
+        retryButton.gameObject.SetActive(true);
+        SetAllowInputs(false);
     }
 
     public void FlightFailed()
