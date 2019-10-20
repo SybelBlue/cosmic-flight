@@ -129,7 +129,7 @@ MonoBehaviour:
   planetPosition: {x: 40, y: 40, z: 0}
   asteroidStartingPostions:
   - {x: 40, y: -40, z: 0}
-  warningThreshold: 100
+  warningThreshold: 60
 --- !u!114 &599807248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,12 +143,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelNumber: 0
-  rocketStartingPosition: {x: -40, y: -40, z: 0}
-  planetPosition: {x: 40, y: -40, z: 0}
+  rocketStartingPosition: {x: -60, y: -60, z: 0}
+  planetPosition: {x: 60, y: -60, z: 0}
   asteroidStartingPostions:
-  - {x: -40, y: 40, z: 0}
-  - {x: 40, y: 40, z: 0}
-  warningThreshold: 100
+  - {x: -60, y: 60, z: 0}
+  - {x: 60, y: 60, z: 0}
+  warningThreshold: 60
 --- !u!1 &740531579
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +796,7 @@ MonoBehaviour:
   - {fileID: 599807248}
   - {fileID: 98543846}
   levelNumber: 0
-  warningThreshold: 100
+  warningThreshold: 60
 --- !u!4 &1949915430
 Transform:
   m_ObjectHideFlags: 0

@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour
     public GameObject relaunchButton;
     public CounterController launchCounter, asteroidCounter, planetCounter;
 
+    public GameObject endOfLevelButtons;
+
     public GameObject rocketGObject;
     public GameObject blackHoleGObject;
     public List<GameObject> planetGObjects;
@@ -30,11 +32,11 @@ public class GameController : MonoBehaviour
 
     public Canvas screenOverlayCanvas;
 
-    public RetryButtonController retryButton;
-
 
     // 1 is normal speed, 0.5 is half speed. I love Unity.
     public float timeScale;
+
+    private GameObject levelDataObject;
 
     private RocketController rocketController;
     private BlackHoleController blackHoleController;
@@ -87,12 +89,12 @@ public class GameController : MonoBehaviour
             MakeNewAsteroid(position);
         }
 
-        retryButton.gameObject.SetActive(false);
+        endOfLevelButtons.SetActive(false);
     }
 
     private void LoadLevelData()
     {
-        GameObject levelDataObject = GameObject.FindGameObjectWithTag("Level Data");
+        levelDataObject = GameObject.FindGameObjectWithTag("Level Data");
         if (levelDataObject == null)
         {
             Debug.LogWarning("Level Data Object Not Found!");
@@ -144,6 +146,16 @@ public class GameController : MonoBehaviour
     public void Play()
     {
         Time.timeScale = timeScale;
+    }
+
+    public void NextLevel()
+    {
+        Debug.Log("called next level");
+        if (levelDataObject == null) return;
+        Debug.Log("working");
+        var levelData = levelDataObject.GetComponent<LevelData>();
+        levelData.levelNumber++;
+        levelData.levelNumber %= levelData.levels.Length;
     }
 
     void FixedUpdate()
@@ -230,7 +242,7 @@ public class GameController : MonoBehaviour
     private void GameWon()
     {
         Debug.LogWarning("YOU WON!");
-        retryButton.gameObject.SetActive(true);
+        endOfLevelButtons.SetActive(true);
         SetAllowInputs(false);
     }
 
@@ -316,7 +328,6 @@ public class GameController : MonoBehaviour
 
     internal void OutOfOxygen()
     {
-        Debug.Log("Out of Oxygen!");
         FlightFailed();
     }
 

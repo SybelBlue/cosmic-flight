@@ -8,7 +8,11 @@ public class RetryButtonController : MonoBehaviour
 
     public void OnClick()
     {
-        DontDestroyOnLoad(levelData);
+        if (levelData != null)
+        {
+            DontDestroyOnLoad(levelData);
+        }
+
         SceneManager.LoadScene("Main");
     }
 
