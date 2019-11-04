@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
@@ -52,6 +51,10 @@ public class RocketController : MonoBehaviour
         ///////////////////////////
     }
 
+    /// <summary>
+    /// Performs one frame of smoothed scaling of the rocket to the
+    /// size determined by showActualSize
+    /// </summary>
     private void Rescale()
     {
         float targetScale = !showActualSize ? 1f : 0.5f;
@@ -59,6 +62,11 @@ public class RocketController : MonoBehaviour
         transform.localScale = new Vector3(newScale, newScale);
     }
 
+    /// <summary>
+    /// Applies force to this object and then rotates so that it
+    /// is facing in the direction of its velocity
+    /// </summary>
+    /// <param name="force">the force to apply to this</param>
     internal void ApplyGravitationalForce(Vector2 force)
     {
         rigidbody.AddForce(force);
@@ -69,19 +77,32 @@ public class RocketController : MonoBehaviour
 
         newRotation.eulerAngles = new Vector3(0, 0, zRotDegrees);
         transform.rotation = newRotation;
-
     }
 
+    /// <summary>
+    /// Rescales this to scale.
+    /// TODO: use this in conjuction with distance from black hole,
+    /// maybe take position of black hole instead of scale?
+    /// </summary>
+    /// <param name="scale">the new scale of this</param>
     internal void AddRelativiticStretch(Vector3 scale)
     {
         transform.localScale = scale;
     }
 
+    /// <summary>
+    /// Gets the angle relative to the start position and aims there
+    /// </summary>
+    /// <param name="angle">angle in standard degrees, with 0 at +x</param>
     internal void AimAtAngle(float angle)
     {
         AimAtAbsoluteAngle(GetRelativeAngle(angle));
     }
 
+    /// <summary>
+    /// Rotates to face that angle, regardless of sprite standard starting angle
+    /// </summary>
+    /// <param name="angle">angle in standard degrees, with 0 at satndard starting angle</param>
     private void AimAtAbsoluteAngle(float angle)
     {
         var rigidbodyTransform = transform;
@@ -91,11 +112,17 @@ public class RocketController : MonoBehaviour
         rigidbodyTransform.rotation = rigidbodyRot;
     }
 
-    public void LaunchRocket(float angle, int power)
+    /// <summary>
+    /// Performs all computation to launch the rocket, sets the rocket to return
+    /// to its regular size and unchilds from any previous planet/start-point
+    /// </summary>
+    /// <param name="angle">angle in standard degrees, with 0 at +x</param>
+    /// <param name="power">power coefficient (positive proportional)</param>
+    internal void Launch(float angle, int power)
     {
         AimAtAngle(angle);
         float adjustedAngle = Mathf.Deg2Rad * GetRelativeAngle(angle);
-        /// !!!!!!!!!!!!!!!!!!!!!!! MATHF TAKES RADIANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        // !!!!!!!!!!!!!!!!!!!!!!! MATHF TAKES RADIANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         var newVelocity = power * velocityPerPower * new Vector2(Mathf.Cos(adjustedAngle), Mathf.Sin(adjustedAngle));
         rigidbody.velocity += newVelocity;
         showActualSize = true;
@@ -104,11 +131,20 @@ public class RocketController : MonoBehaviour
         planetLandedOn = null;
     }
 
+    /// <summary>
+    /// Converts standard angle to angle relative to the sprite's starting angle
+    /// </summary>
+    /// <param name="standardAngle">angle in standard degrees, with 0 at +x</param>
+    /// <returns></returns>
     private float GetRelativeAngle(float standardAngle)
     {
         return standardAngle + defaultAngle;
     }
 
+    /// <summary>
+    /// Sets up this object to perform a smooth landing on planet
+    /// </summary>
+    /// <param name="planet">the GameObject to land on</param>
     internal void LandOn(GameObject planet)
     {
         if (planetToLandOn != null) return;

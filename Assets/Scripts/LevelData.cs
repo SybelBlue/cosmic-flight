@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A class attachable to a GameObject designed to store all
+/// LevelConfig instances for the whole game
+/// </summary>
 public class LevelData : MonoBehaviour
 {
     public LevelConfig[] levels;
@@ -8,6 +12,7 @@ public class LevelData : MonoBehaviour
 
     public float warningThreshold;
 
+    // computed properties, but getters nonetheless, all relative to the selected levelNumber
     public Vector3 rocketStartingPosition
     {
         get
@@ -31,6 +36,11 @@ public class LevelData : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Propigates important properties down, auto-labels them with
+    /// their level number, and then requests each to validate its own data.
+    /// Called whenever a change is made to this object in the inspector.
+    /// </summary>
     private void OnValidate()
     {
         for (int i = 0; i < levels.Length; i++)

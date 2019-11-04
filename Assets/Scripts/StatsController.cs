@@ -5,7 +5,6 @@ public class StatsController : MonoBehaviour
 {
     public Vector3 touchOffset;
     public Text statsText;
-    private Rect rect;
 
     void Start()
     {
@@ -14,12 +13,17 @@ public class StatsController : MonoBehaviour
 
     public void ResetFields()
     {
-        rect = GetComponent<RectTransform>().rect;
         gameObject.SetActive(false);
         statsText.text = "Stats Text\nStats Text 2";
     }
 
-
+    /// <summary>
+    /// Activates the shot statistics text box.
+    /// TODO: make the text box not capable of being dragged off-screen
+    /// </summary>
+    /// <param name="constants">the data container to draw from</param>
+    /// <param name="canvasWidth">used to calculate bounds</param>
+    /// <param name="canvasHeight">used to calculate bounds</param>
     public void DisplayShotStatistics(InputConstants constants, float canvasWidth, float canvasHeight)
     {
         Vector3 position = constants.gesturePosition;
@@ -48,8 +52,8 @@ public class StatsController : MonoBehaviour
         // set the text
         statsText.text = (constants.gesturePower > 0) ?
             string.Format("Power Level: {0}\nAngle: {1}",
-                constants.gesturePower,
-                (int)constants.gestureZAngleOffset
+                gesturePower,
+                (int)angleOffset
             ) :
             "Cancel\nShot";
     }
