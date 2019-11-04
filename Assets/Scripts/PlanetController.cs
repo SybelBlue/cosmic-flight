@@ -28,6 +28,11 @@ public class PlanetController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up this planet to start replacing asteroid
+    /// Called by GameController.Terraform
+    /// </summary>
+    /// <param name="asteroid">the asteroid GameObject to replace</param>
     internal void Replace(GameObject asteroid)
     {
         asteroidToReplace = asteroid;

@@ -18,7 +18,7 @@ public class OxygenMeterController : MonoBehaviour
 
     void Update()
     {
-        target = GetTarget(mode);
+        target = GetTarget();
         mainSlider.value = Mathf.Lerp(mainSlider.value,
             target,
             mode == OxygenMode.Safe ? 0.2f : 0.9f);
@@ -31,10 +31,16 @@ public class OxygenMeterController : MonoBehaviour
             gameController.OutOfOxygen();
         }
 
-        label.text = String.Format("O2: {0}%", Mathf.RoundToInt(mainSlider.value));
+        label.text = string.Format("O2: {0}%", Mathf.RoundToInt(mainSlider.value));
         label.color = Color.Lerp(label.color, GetLabelColor(mainSlider.value / mainSlider.maxValue), 0.4f);
     }
 
+    /// <summary>
+    /// Gets the color of a label based on how full the meter
+    /// is from 0.0 to 1.0
+    /// </summary>
+    /// <param name="value">fill ratio in [0.0, 1.0]</param>
+    /// <returns>label color</returns>
     private Color GetLabelColor(float value)
     {
         if (value > 0.75f) return highO2Color;
@@ -42,7 +48,12 @@ public class OxygenMeterController : MonoBehaviour
         return lowO2Color;
     }
 
-    private float GetTarget(OxygenMode mode)
+    /// <summary>
+    /// Takes an oxygen mode and returns the target value of
+    /// the oxygen slider to smoothly slide to after one update.
+    /// </summary>
+    /// <returns>the target value in this mode after one update</returns>
+    private float GetTarget()
     {
         switch (mode)
         {
@@ -59,6 +70,9 @@ public class OxygenMeterController : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Deducts O2 for claiming a world
+    /// </summary>
     internal void ClaimAsteroid()
     {
         target -= claimCost;

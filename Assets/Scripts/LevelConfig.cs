@@ -1,5 +1,11 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Used as a container for all data necessary to make a new level.
+/// Contains extra bells and whistles to let unity do the hard part
+/// and enable level creation via the inspector only. Not attachable
+/// to a GameObject.
+/// </summary>
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/LevelConfig", order = 1)]
 public class LevelConfig : ScriptableObject
 {
@@ -11,6 +17,10 @@ public class LevelConfig : ScriptableObject
 
     public float warningThreshold;
 
+    /// <summary>
+    /// Checks that inputted properties are not invalid parameters for a level.
+    /// Called each time a value in the inspector is altered.
+    /// </summary>
     internal void OnValidate()
     {
         if ((rocketStartingPosition - planetPosition).magnitude < warningThreshold)

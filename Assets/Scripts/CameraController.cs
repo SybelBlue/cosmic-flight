@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// An enum that encodes all behavioral states the camera can be in
+/// </summary>
 public enum CameraMode
 {
     Neutral, FollowRocket, StayPut
@@ -59,7 +60,7 @@ public class CameraController : MonoBehaviour
                 focus = neutralPosition;
                 size = neutralSize;
                 break;
-            default:
+            default: // in case of future additions to CameraMode
                 focus = neutralPosition;
                 size = neutralSize;
                 Debug.LogError("Mode not recognized!");
@@ -69,7 +70,12 @@ public class CameraController : MonoBehaviour
         CenterOn(focus, size);
     }
 
-    internal void CenterOn(Vector3 position, float size)
+    /// <summary>
+    /// Centers the camera on position (x,y) with viewport diagonal size
+    /// </summary>
+    /// <param name="position">position to center on (z ignored)</param>
+    /// <param name="size">new camera orthographicSize</param>
+    private void CenterOn(Vector3 position, float size)
     {
         position += offsetFromCenter;
         position.z = transform.position.z;

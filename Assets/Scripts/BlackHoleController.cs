@@ -16,7 +16,11 @@ public class BlackHoleController : MonoBehaviour
         return r;
     }
 
-    // Destroy everything that enters the trigger
+    /// <summary>
+    /// Notifies gameController of everything that enters event
+    /// horizon
+    /// </summary>
+    /// <param name="collider">object that entered event horizon</param>
     void OnTriggerEnter2D(Collider2D collider)
     {
         gameController.ObjectHitBlackHole(collider.gameObject);
