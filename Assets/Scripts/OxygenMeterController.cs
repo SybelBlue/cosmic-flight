@@ -1,7 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// An enum that encodes all the modes of the oxygen meter
+/// </summary>
 public enum OxygenMode
 {
     Safe, Flying, Landed
