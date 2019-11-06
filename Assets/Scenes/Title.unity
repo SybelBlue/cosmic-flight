@@ -126,12 +126,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 3
   rocketStartingPosition: {x: -60, y: -60, z: 0}
-  planetPosition: {x: 40, y: 90, z: 0}
+  planetPosition: {x: 60, y: 60, z: 0}
   asteroidStartingPostions:
-  - {x: -30, y: -30, z: 0}
-  - {x: -30, y: 30, z: 0}
-  - {x: 30, y: -30, z: 0}
-  - {x: 30, y: 30, z: 0}
+  - {x: 35, y: -35, z: 0}
+  - {x: -35, y: 35, z: 0}
+  - {x: -50, y: 100, z: 0}
   warningThreshold: 60
 --- !u!114 &599807248
 MonoBehaviour:
