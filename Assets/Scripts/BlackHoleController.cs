@@ -7,6 +7,11 @@ public class BlackHoleController : MonoBehaviour
 
     public GameController gameController;
 
+    /// <summary>
+    /// Returns the gravitational force on a rocket at rocketPosition
+    /// </summary>
+    /// <param name="rocketPosition">position of the rocket</param>
+    /// <returns>standard gravitational force at rocketPosition</returns>
     public Vector3 GetGravitationalForce(Vector3 rocketPosition)
     {
         var r = this.transform.position - rocketPosition;

@@ -321,7 +321,7 @@ public class InputController : MonoBehaviour
             Handheld.Vibrate();
         }
 
-        state.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * state.gestureDelta.x, -360, 360);
+        state.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * state.gestureDelta.x * -1 , -360, 360);
         state.cameraOffset = state.gestureDelta * Mathf.Clamp(peekSensitivity / 100, 0.01f, 2.5f);
 
         whenUpdated(state.copy());
