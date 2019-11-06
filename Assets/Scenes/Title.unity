@@ -124,13 +124,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3452713e06e4645aaaca0fbab6ddbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelNumber: 2
+  levelNumber: 3
   rocketStartingPosition: {x: -60, y: -60, z: 0}
-  planetPosition: {x: 60, y: 60, z: 0}
+  planetPosition: {x: 40, y: 90, z: 0}
   asteroidStartingPostions:
-  - {x: 35, y: -35, z: 0}
-  - {x: -35, y: 35, z: 0}
-  - {x: -50, y: 100, z: 0}
+  - {x: -30, y: -30, z: 0}
+  - {x: -30, y: 30, z: 0}
+  - {x: 30, y: -30, z: 0}
+  - {x: 30, y: 30, z: 0}
   warningThreshold: 60
 --- !u!114 &599807248
 MonoBehaviour:
@@ -798,7 +799,8 @@ MonoBehaviour:
   - {fileID: 599807248}
   - {fileID: 98543846}
   - {fileID: 98543846}
-  levelNumber: 2
+  - {fileID: 98543846}
+  levelNumber: 3
   warningThreshold: 60
 --- !u!4 &1949915430
 Transform:
