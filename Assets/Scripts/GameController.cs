@@ -271,10 +271,14 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            body.GetComponent<AsteroidController>().RaiseFlag();
-            claimedAsteroids.Add(body);
+            if (!claimedAsteroids.Contains(body))
+            {
+                body.GetComponent<AsteroidController>().RaiseFlag();
+                claimedAsteroids.Add(body);
+                oxygenMeterController.ClaimAsteroid();
+            }
+
             SetOxygenMode(OxygenMode.Landed);
-            oxygenMeterController.ClaimAsteroid();
         }
     }
 
