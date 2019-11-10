@@ -531,7 +531,7 @@ RectTransform:
   m_GameObject: {fileID: 186531816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 1353467681}
   m_Father: {fileID: 1415570612}
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8207547, g: 0.78299373, b: 0.63879496, a: 1}
+  m_Color: {r: 0.9433962, g: 0.89725184, b: 0.7075472, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -565,7 +565,7 @@ MonoBehaviour:
     m_FontSize: 47
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -601,9 +601,9 @@ MonoBehaviour:
   asteroidLandedBurnRate: 3
   claimCost: 15
   target: 0
-  highO2Color: {r: 0.16273692, g: 0.5849056, b: 0.046902817, a: 0.50980395}
-  mediumO2Color: {r: 0.8679245, g: 0.79831046, b: 0.24973297, a: 0.83137256}
-  lowO2Color: {r: 0.8301887, g: 0.34069067, b: 0.34069067, a: 1}
+  highO2Color: {r: 0.23599322, g: 0.8584906, b: 0.068841234, a: 0.50980395}
+  mediumO2Color: {r: 0.9716981, g: 0.9225934, b: 0.22459061, a: 0.83137256}
+  lowO2Color: {r: 0.990566, g: 0.1728818, b: 0.1728818, a: 1}
   mainSlider: {fileID: 1353467682}
   redSlider: {fileID: 313294554}
 --- !u!1 &209000527
