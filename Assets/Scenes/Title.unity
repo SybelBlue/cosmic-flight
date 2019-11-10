@@ -112,63 +112,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &510415015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3452713e06e4645aaaca0fbab6ddbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelNumber: 1
-  rocketStartingPosition: {x: -40, y: -40, z: 0}
-  planetPosition: {x: 40, y: -40, z: 0}
-  asteroidStartingPostions:
-  - {x: -40, y: 40, z: 0}
-  - {x: 40, y: 40, z: 0}
-  warningThreshold: 60
---- !u!114 &541930509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3452713e06e4645aaaca0fbab6ddbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelNumber: 0
-  rocketStartingPosition: {x: -60, y: -60, z: 0}
-  planetPosition: {x: 60, y: -60, z: 0}
-  asteroidStartingPostions:
-  - {x: -60, y: 60, z: 0}
-  - {x: 60, y: 60, z: 0}
-  warningThreshold: 60
---- !u!114 &685952297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3452713e06e4645aaaca0fbab6ddbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelNumber: 2
-  rocketStartingPosition: {x: -60, y: -60, z: 0}
-  planetPosition: {x: 60, y: 60, z: 0}
-  asteroidStartingPostions:
-  - {x: 35, y: -35, z: 0}
-  - {x: -50, y: 80, z: 0}
-  warningThreshold: 60
 --- !u!1 &740531579
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,26 +644,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1734351282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3452713e06e4645aaaca0fbab6ddbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelNumber: 3
-  rocketStartingPosition: {x: -40, y: -40, z: 0}
-  planetPosition: {x: 50, y: 80, z: 0}
-  asteroidStartingPostions:
-  - {x: 35, y: -35, z: 0}
-  - {x: -40, y: 80, z: 0}
-  - {x: 35, y: 35, z: 0}
-  warningThreshold: 60
 --- !u!1 &1949116916
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,10 +756,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 541930509}
-  - {fileID: 510415015}
-  - {fileID: 685952297}
-  - {fileID: 1734351282}
+  - {fileID: 11400000, guid: 0f342b7bba133174b87b746eda894f81, type: 2}
+  - {fileID: 11400000, guid: c9afba88e22ad854db1072ba65e41bc1, type: 2}
+  - {fileID: 11400000, guid: 73bc6405be0a9ee43a0e253d20223bf9, type: 2}
+  - {fileID: 11400000, guid: efb9269bad3c4ce438e025944353a2fa, type: 2}
+  - {fileID: 11400000, guid: 629e2fcd831ce1646b1f818db21ade3b, type: 2}
+  - {fileID: 11400000, guid: a4bb2d2c3bc507949b0d45abea8b1c93, type: 2}
   levelNumber: 0
   warningThreshold: 60
 --- !u!4 &1949915430

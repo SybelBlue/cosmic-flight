@@ -47,7 +47,7 @@ public class LevelData : MonoBehaviour
         {
             if (levels[i] == null)
             {
-                levels[i] = ScriptableObject.CreateInstance<LevelConfig>();
+				continue;
             }
 
             levels[i].levelNumber = i;
