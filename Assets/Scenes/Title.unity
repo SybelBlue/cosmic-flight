@@ -763,7 +763,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 629e2fcd831ce1646b1f818db21ade3b, type: 2}
   - {fileID: 11400000, guid: a4bb2d2c3bc507949b0d45abea8b1c93, type: 2}
   levelNumber: 0
-  warningThreshold: 0
+  warningThreshold: 60
 --- !u!4 &1949915430
 Transform:
   m_ObjectHideFlags: 0
@@ -772,7 +772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949915428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
