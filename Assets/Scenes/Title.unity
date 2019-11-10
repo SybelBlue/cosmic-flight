@@ -737,7 +737,7 @@ GameObject:
   - component: {fileID: 1949915430}
   - component: {fileID: 1949915429}
   m_Layer: 0
-  m_Name: Level Data
+  m_Name: Level Manager Object
   m_TagString: Level Data
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -752,7 +752,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1949915428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3111a25505fe244194ccdc16e7d264d, type: 3}
+  m_Script: {fileID: 11500000, guid: ee8db03a972444c4682bfbadaee4d162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
@@ -763,7 +763,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 629e2fcd831ce1646b1f818db21ade3b, type: 2}
   - {fileID: 11400000, guid: a4bb2d2c3bc507949b0d45abea8b1c93, type: 2}
   levelNumber: 0
-  warningThreshold: 60
+  warningThreshold: 0
 --- !u!4 &1949915430
 Transform:
   m_ObjectHideFlags: 0
