@@ -313,7 +313,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void GameWon()
     {
-        Debug.LogWarning("YOU WON!");
         endOfLevelButtons.SetActive(true);
         SetAllowInputs(false);
     }
