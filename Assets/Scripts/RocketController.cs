@@ -128,6 +128,7 @@ public class RocketController : MonoBehaviour
         showActualSize = true;
         // !!!!!!!!!!!!!!!!!!!!!!!! UNCHILD SO THAT IT FLIES STRAIGHT !!!!!!!!!!!!!!!!!!
         transform.parent = null;
+        planetToLandOn = null;
         planetLandedOn = null;
     }
 

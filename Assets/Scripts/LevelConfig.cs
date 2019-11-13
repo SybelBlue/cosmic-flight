@@ -6,7 +6,7 @@
 /// and enable level creation via the inspector only. Not attachable
 /// to a GameObject.
 /// </summary>
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/LevelConfig", order = 1)]
+[CreateAssetMenu(fileName = "Level", menuName = "ScriptableObjects/LevelConfig", order = 1)]
 public class LevelConfig : ScriptableObject
 {
 
@@ -16,6 +16,9 @@ public class LevelConfig : ScriptableObject
     public Vector3[] asteroidStartingPostions;
 
     public float warningThreshold;
+
+	[TextArea]
+	public string comments;
 
     /// <summary>
     /// Checks that inputted properties are not invalid parameters for a level.

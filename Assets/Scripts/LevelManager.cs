@@ -4,8 +4,9 @@
 /// A class attachable to a GameObject designed to store all
 /// LevelConfig instances for the whole game
 /// </summary>
-public class LevelData : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
+
     public LevelConfig[] levels;
 
     public int levelNumber;
@@ -43,11 +44,12 @@ public class LevelData : MonoBehaviour
     /// </summary>
     private void OnValidate()
     {
+        if (levels == null) return;
         for (int i = 0; i < levels.Length; i++)
         {
             if (levels[i] == null)
             {
-                levels[i] = ScriptableObject.CreateInstance<LevelConfig>();
+                continue;
             }
 
             levels[i].levelNumber = i;

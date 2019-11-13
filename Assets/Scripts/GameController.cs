@@ -112,11 +112,11 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        LevelData levelData = levelDataObject.GetComponent<LevelData>();
+        LevelManager levelManager = levelDataObject.GetComponent<LevelManager>();
 
-        this.rocketStartingPosition = levelData.rocketStartingPosition;
-        this.planetPosition = levelData.planetPosition;
-        this.asteroidStartingPositions = levelData.asteroidStartingPostions;
+        this.rocketStartingPosition = levelManager.rocketStartingPosition;
+        this.planetPosition = levelManager.planetPosition;
+        this.asteroidStartingPositions = levelManager.asteroidStartingPostions;
     }
 
     /// <summary>
@@ -186,9 +186,9 @@ public class GameController : MonoBehaviour
         Debug.Log("called next level");
         if (levelDataObject == null) return;
         Debug.Log("working");
-        var levelData = levelDataObject.GetComponent<LevelData>();
-        levelData.levelNumber++;
-        levelData.levelNumber %= levelData.levels.Length;
+        LevelManager levelManager = levelDataObject.GetComponent<LevelManager>();
+        levelManager.levelNumber++;
+        levelManager.levelNumber %= levelManager.levels.Length;
     }
 
     /// <summary>
@@ -313,7 +313,6 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void GameWon()
     {
-        Debug.LogWarning("YOU WON!");
         endOfLevelButtons.SetActive(true);
         SetAllowInputs(false);
     }
