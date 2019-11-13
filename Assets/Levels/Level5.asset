@@ -17,7 +17,7 @@ MonoBehaviour:
   planetPosition: {x: 50, y: 80, z: 0}
   asteroidStartingPostions:
   - {x: 35, y: -35, z: 0}
-  - {x: -40, y: 80, z: 0}
-  - {x: 35, y: 35, z: 0}
+  - {x: -35, y: 85, z: 0}
+  - {x: -50, y: 10, z: 0}
   warningThreshold: 60
   comments: 
