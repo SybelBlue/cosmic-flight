@@ -3138,12 +3138,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b5d373116d35d459a87e067525396e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rocketController: {fileID: 0}
   rings: {fileID: 1657838738}
   displayRings: 0
   acceptingInputs: 0
-  unitsYPerPower: 50
-  degreesPerUnitX: 1.2
+  unitsYPerPower: 200
+  degreesPerUnitX: 1
   peekSensitivity: 10
+  cam: {fileID: 519420031}
 --- !u!1 &2141272685
 GameObject:
   m_ObjectHideFlags: 0

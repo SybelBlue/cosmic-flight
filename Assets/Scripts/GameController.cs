@@ -87,6 +87,7 @@ public class GameController : MonoBehaviour
 
         rocketGObject = Instantiate(rocketPrefab, rocketStartingPosition, Quaternion.Euler(0, 0, 0));
         rocketController = rocketGObject.GetComponent<RocketController>();
+        inputController.rocketController = rocketController;
 
         MakeNewPlanet(planetPosition);
 

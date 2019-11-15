@@ -57,6 +57,9 @@ public class InputConstants
     /// </summary>    
     public Vector3 gestureDelta;
 
+  
+    public Vector3 gestureRocketDelta;
+
     /// <summary>
     /// current gesture position
     /// </summary>    
@@ -88,6 +91,7 @@ public class InputConstants
     /// <param name="gestureZAngleOffset"></param>
     /// <param name="gestureStartPosition"></param>
     /// <param name="gestureDelta"></param>
+    /// <param name="gestureRocketDelta"></param>
     /// <param name="gesturePosition"></param>
     /// <param name="cameraOffset"></param>
     private InputConstants(
@@ -95,7 +99,8 @@ public class InputConstants
         int gesturePower, 
         float gestureZAngleOffset, 
         Vector3 gestureStartPosition, 
-        Vector3 gestureDelta, 
+        Vector3 gestureDelta,
+        Vector3 gestureRocketDelta,
         Vector3 gesturePosition, 
         Vector3 cameraOffset)
     {
@@ -104,6 +109,7 @@ public class InputConstants
         this.gestureZAngleOffset = gestureZAngleOffset;
         this.gestureStartPosition = gestureStartPosition;
         this.gestureDelta = gestureDelta;
+        this.gestureRocketDelta = gestureRocketDelta;
         this.gesturePosition = gesturePosition;
         this.cameraOffset = cameraOffset;
     }
@@ -120,6 +126,7 @@ public class InputConstants
             gestureZAngleOffset, 
             gestureStartPosition, 
             gestureDelta, 
+            gestureRocketDelta,
             gesturePosition, 
             cameraOffset);
     }
@@ -147,6 +154,8 @@ public class InputController : MonoBehaviour
     /// Called when a captured gesture ends
     /// </summary>
     public event GestureEventDelegate whenEnded;
+
+    public RocketController rocketController;
 
     /// <summary>
     /// The "rings" to display when a user is aiming the rocket
@@ -176,6 +185,8 @@ public class InputController : MonoBehaviour
     /// scalar factor * 100 to move camera when peeking around during flight
     /// </summary>
     public float peekSensitivity;
+
+    public Camera cam;
 
     /// <summary>
     /// current state of the input controller, computed and otherwise
@@ -264,7 +275,7 @@ public class InputController : MonoBehaviour
 
         if (displayRings)
         {
-            rings.SetActive(true);
+            //rings.SetActive(true);
             rings.transform.position = startPosition + unitsYPerPower * 2 * Vector3.up;
             rings.transform.localScale = (2f * unitsYPerPower) / 100f * new Vector3(1, 1);
         }
@@ -310,19 +321,33 @@ public class InputController : MonoBehaviour
     /// <summary>
     /// Re-computes the computed properties of state based on the latest position of the gesture input
     /// </summary>
-    /// <param name="position">the newest posiiton of a gesture</param>
+    /// <param name="position">the newest positon of a gesture</param>
     private void UpdateGestureProperties(Vector3 position)
     {
+
         int oldPower = state.gesturePower;
-        state.gesturePower = (int)Mathf.Clamp(state.gestureDelta.y / unitsYPerPower + 2, 0, 3);
+
+        state.gestureRocketDelta = cam.WorldToScreenPoint(rocketController.transform.position) - position;
+
+
+        Debug.DrawLine(cam.WorldToScreenPoint(rocketController.transform.position), position, Color.cyan);
+
+      
+
+        state.gesturePower = (int)Mathf.Clamp(state.gestureRocketDelta.magnitude/unitsYPerPower,0,3);
+
+       // state.gesturePower = (int)Mathf.Clamp(state.gestureDelta.y / unitsYPerPower + 2, 0, 3);
 
         if (oldPower != state.gesturePower && displayRings)
         {
             Handheld.Vibrate();
         }
+       float inverseTan = Mathf.Atan2(state.gestureRocketDelta.x, state.gestureRocketDelta.y);
 
-        state.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * state.gestureDelta.x * -1 , -360, 360);
-        state.cameraOffset = state.gestureDelta * Mathf.Clamp(peekSensitivity / 100, 0.01f, 2.5f);
+       state.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * inverseTan * - 180 / Mathf.PI, -360, 360);
+      // state.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * state.gestureDelta.x * -1, -360, 360);
+
+       state.cameraOffset = state.gestureDelta * Mathf.Clamp(peekSensitivity / 100, 0.01f, 2.5f);
 
         whenUpdated(state.copy());
     }
