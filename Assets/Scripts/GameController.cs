@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
 
     public GameObject endOfLevelButtons;
 
+    public ParticleSystem explosionSystem;
+
     // supposed to be 0-length or null until filled by this //
     public GameObject rocketGObject;                        //
     public GameObject blackHoleGObject;                     //
@@ -324,6 +326,9 @@ public class GameController : MonoBehaviour
     public void FlightFailed()
     {
         inPlay = false;
+        explosionSystem.gameObject.transform.position = rocketController.transform.position;
+        explosionSystem.Play();
+        rocketController.transform.position = lastSafeLanding.transform.position;
         rocketController.LandOn(lastSafeLanding);
         SetOxygenMode(OxygenMode.Safe);
         claimedAsteroids.ForEach(asteroid => asteroid.GetComponent<AsteroidController>().LowerFlag());

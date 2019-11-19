@@ -30,9 +30,9 @@ public class RocketController : MonoBehaviour
     {
         Rescale();
 
-
         if (planetToLandOn != null)
         {
+            GetComponent<TrailRenderer>().Clear();
             if ((planetToLandOn.transform.position - transform.position).sqrMagnitude > 1)
             {
                 transform.position = Vector3.Slerp(transform.position, planetToLandOn.transform.position, 0.2f);
