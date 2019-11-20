@@ -154,9 +154,9 @@ public class RocketController : MonoBehaviour
         if (rigidbody != null) rigidbody.velocity = Vector3.zero;
         showActualSize = false;
         
-        // aim base at planet
-        Vector3 awayFromPlanet = this.transform.position - planet.transform.position;
-        float angle = Mathf.Atan2(awayFromPlanet.y, awayFromPlanet.x);
+        // aim point at planet
+        Vector3 towardsPlanet = planet.transform.position - this.transform.position;
+        float angle = Mathf.Atan2(towardsPlanet.y, towardsPlanet.x);
         AimAtAbsoluteAngle(Mathf.Rad2Deg * angle);
 
         // make a child of the planet so it will rotate with it
