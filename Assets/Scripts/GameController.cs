@@ -260,7 +260,7 @@ public class GameController : MonoBehaviour
     internal void RocketLandOn(GameObject body)
     {
         inPlay = false;
-        SetCameraFollowMode(CameraMode.Neutral);
+        SetCameraFollowMode(CameraMode.FollowRocket);
         rocketController.LandOn(body);
         inputController.displayRings = true;
 
@@ -372,7 +372,7 @@ public class GameController : MonoBehaviour
     private void ShotCancelled()
     {
         rocketController.ResetRotation();
-        SetCameraFollowMode(CameraMode.Neutral);
+        SetCameraFollowMode(CameraMode.FollowRocket);
     }
 
     /// <summary>
@@ -427,7 +427,7 @@ public class GameController : MonoBehaviour
         }
         else
         {
-            SetCameraFollowMode(CameraMode.FollowRocket);
+            SetCameraFollowMode(CameraMode.Wide);
             AimRocketAtAngle(input.gestureZAngleOffset);
             statsController.DisplayShotStatistics(input, canvasWidth, canvasHeight);
         }

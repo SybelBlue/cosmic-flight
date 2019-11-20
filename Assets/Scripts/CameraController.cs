@@ -5,7 +5,7 @@
 /// </summary>
 public enum CameraMode
 {
-    Neutral, FollowRocket, StayPut
+    Neutral, FollowRocket, StayPut, Wide
 }
 
 public class CameraController : MonoBehaviour
@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     public Vector3 neutralPosition;
     public float neutralSize;
     public float followSize;
+    public float wideSize;
 
     public Vector3 offsetFromCenter;
 
@@ -59,6 +60,10 @@ public class CameraController : MonoBehaviour
             case CameraMode.Neutral:
                 focus = neutralPosition;
                 size = neutralSize;
+                break;
+            case CameraMode.Wide:
+                focus = gameController.CurrentRocketPosition() / 2;
+                size = wideSize;
                 break;
             default: // in case of future additions to CameraMode
                 focus = neutralPosition;
