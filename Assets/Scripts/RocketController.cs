@@ -108,7 +108,7 @@ public class RocketController : MonoBehaviour
         var rigidbodyTransform = transform;
         var rigidbodyRot = rigidbodyTransform.rotation;
 
-        rigidbodyRot.eulerAngles = new Vector3(0, 0, angle);
+        rigidbodyRot.eulerAngles = new Vector3(0, 0, angle); // TODO: change back to angle?
         rigidbodyTransform.rotation = rigidbodyRot;
     }
 
