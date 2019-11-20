@@ -623,9 +623,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aboutPages:
-  - 
-  - 
-  - 
+  - "\"Your mission is to transform asteroids into habitable planets.\\n\\nBut be
+    warned, there is a black hole making your mission harder\u2026 \""
+  - '"A black hole is a massive region of space that does not follow the laws of physics
+    that we''re used to. It has such strong gravity that it can curve the space around
+    it."'
+  - '"The image of the black hole in Cosmic Flight is based on the image produced
+    by Dr. Katie Bouman and the team she led."'
   page: 0
   displayer: {fileID: 1685837862}
 --- !u!4 &1323576488
