@@ -1042,8 +1042,9 @@ MonoBehaviour:
   gameController: {fileID: 2119872602}
   mode: 0
   neutralPosition: {x: 0, y: 0, z: -10}
-  neutralSize: 160
-  followSize: 100
+  neutralSize: 140
+  followSize: 80
+  wideSize: 180
   offsetFromCenter: {x: 0, y: 0, z: 0}
   mapX: 480
   mapY: 480
@@ -3142,7 +3143,7 @@ MonoBehaviour:
   rings: {fileID: 1657838738}
   displayRings: 0
   acceptingInputs: 0
-  unitsYPerPower: 200
+  unitsYPerPower: 100
   degreesPerUnitX: 1
   peekSensitivity: 10
   cam: {fileID: 519420031}
