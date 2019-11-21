@@ -57,7 +57,7 @@ public class RocketController : MonoBehaviour
     /// </summary>
     private void Rescale()
     {
-        float targetScale = !showActualSize ? 1f : 0.5f;
+        float targetScale = !showActualSize  && false ? 1f : 0.5f;
         float newScale = Mathf.Lerp(transform.localScale.x, targetScale, 0.2f);
         transform.localScale = new Vector3(newScale, newScale);
     }
