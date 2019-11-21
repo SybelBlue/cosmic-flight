@@ -130,16 +130,16 @@ LineRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 1
   m_Positions:
-  - {x: 0, y: 0.5, z: 0}
-  - {x: 5, y: 0.5, z: 0}
-  - {x: 10, y: 0.5, z: 0}
-  - {x: 15, y: 0.5, z: 0}
-  - {x: 20, y: 0.5, z: 0}
   - {x: 25, y: 0.5, z: 0}
   - {x: 30, y: 0.5, z: 0}
   - {x: 35, y: 0.5, z: 0}
   - {x: 40, y: 0.5, z: 0}
   - {x: 45, y: 0.5, z: 0}
+  - {x: 50, y: 0.5, z: 0}
+  - {x: 55, y: 0.5, z: 0}
+  - {x: 60, y: 0.5, z: 0}
+  - {x: 65, y: 0.5, z: 0}
+  - {x: 70, y: 0.5, z: 0}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.5
@@ -148,7 +148,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.7065201
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -160,9 +160,9 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.2830189, g: 0.26833394, b: 0.26833394, a: 1}
-      key1: {r: 0.3490566, g: 0.34082413, b: 0.34082413, a: 0.5019608}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.9245283, g: 0.7978875, b: 0.4753471, a: 0.983588}
+      key1: {r: 0.9245283, g: 0.7978875, b: 0.4753471, a: 0.983588}
+      key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -176,9 +176,9 @@ LineRenderer:
       ctime5: 0
       ctime6: 0
       ctime7: 0
-      atime0: 0
-      atime1: 65535
-      atime2: 0
+      atime0: 15420
+      atime1: 58018
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -186,7 +186,7 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
