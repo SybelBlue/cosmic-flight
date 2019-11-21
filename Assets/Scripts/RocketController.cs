@@ -57,7 +57,7 @@ public class RocketController : MonoBehaviour
     /// </summary>
     private void Rescale()
     {
-        float targetScale = !showActualSize ? 1f : 0.5f;
+        float targetScale = !showActualSize  && false ? 1f : 0.5f;
         float newScale = Mathf.Lerp(transform.localScale.x, targetScale, 0.2f);
         transform.localScale = new Vector3(newScale, newScale);
     }
@@ -108,7 +108,7 @@ public class RocketController : MonoBehaviour
         var rigidbodyTransform = transform;
         var rigidbodyRot = rigidbodyTransform.rotation;
 
-        rigidbodyRot.eulerAngles = new Vector3(0, 0, angle);
+        rigidbodyRot.eulerAngles = new Vector3(0, 0, angle); // TODO: change back to angle?
         rigidbodyTransform.rotation = rigidbodyRot;
     }
 
