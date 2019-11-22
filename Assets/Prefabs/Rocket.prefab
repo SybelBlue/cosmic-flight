@@ -90,6 +90,7 @@ MonoBehaviour:
   sprite: {fileID: 4500021571792006262}
   defaultAngle: 90
   rigidbody: {fileID: 0}
+  aimLine: {fileID: 0}
   velocityPerPower: 10
   showActualSize: 0
 --- !u!120 &619956210917431388
@@ -99,7 +100,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2794735893918823343}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 0

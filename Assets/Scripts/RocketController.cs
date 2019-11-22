@@ -8,6 +8,8 @@ public class RocketController : MonoBehaviour
 
     public Rigidbody2D rigidbody;
 
+    public LineRenderer aimLine;
+
     public float velocityPerPower;
     public bool showActualSize;
     
@@ -18,6 +20,7 @@ public class RocketController : MonoBehaviour
         rigidbody = transform.GetComponent<Rigidbody2D>();
         showActualSize = false;
         ResetRotation();
+        aimLine = GetComponent<LineRenderer>();
     }
 
     internal void ResetRotation()
