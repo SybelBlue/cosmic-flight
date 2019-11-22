@@ -899,8 +899,9 @@ GameObject:
   - component: {fileID: 289725743}
   - component: {fileID: 289725745}
   - component: {fileID: 289725744}
+  - component: {fileID: 289725746}
   m_Layer: 5
-  m_Name: Text
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -965,6 +966,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289725742}
   m_CullTransparentMesh: 0
+--- !u!114 &289725746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289725742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59d27011966552b4c8069f249745b782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreStr: 
+  displayer: {fileID: 289725744}
 --- !u!1 &312840915
 GameObject:
   m_ObjectHideFlags: 0
@@ -8288,6 +8303,7 @@ MonoBehaviour:
   asteroidCounter: {fileID: 2095491236}
   planetCounter: {fileID: 997707449}
   endOfLevelButtons: {fileID: 1517677832}
+  scoreController: {fileID: 289725746}
   explosionSystem: {fileID: 904116577}
   rocketGObject: {fileID: 0}
   blackHoleGObject: {fileID: 0}
