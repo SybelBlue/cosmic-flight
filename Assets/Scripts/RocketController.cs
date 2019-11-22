@@ -4,7 +4,11 @@ public class RocketController : MonoBehaviour
 {
     public GameObject planetToLandOn, planetLandedOn;
     public GameObject sprite;
+    public GameObject[] fireObjects;
     public float defaultAngle;
+
+    public int framesPerFireDrop;
+    public int framesSinceLaunch;
 
     public Rigidbody2D rigidbody;
 
@@ -32,6 +36,23 @@ public class RocketController : MonoBehaviour
     void Update()
     {
         Rescale();
+
+        switch (framesSinceLaunch / framesPerFireDrop)
+        {
+            case 3:
+                fireObjects[2].SetActive(false);
+                fireObjects[1].SetActive(false);
+                fireObjects[0].SetActive(false);
+                break;
+            case 2:
+                fireObjects[1].SetActive(false);
+                fireObjects[0].SetActive(false);
+                break;
+            case 1:
+                fireObjects[0].SetActive(false);
+                break;
+
+        }
 
         if (planetToLandOn != null)
         {
@@ -133,6 +154,13 @@ public class RocketController : MonoBehaviour
         transform.parent = null;
         planetToLandOn = null;
         planetLandedOn = null;
+
+        framesSinceLaunch = 0;
+
+        for (int i = 0; i < power; i++)
+        {
+            fireObjects[i].SetActive(true);
+        }
     }
 
     /// <summary>

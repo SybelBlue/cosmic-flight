@@ -17,7 +17,7 @@ public class BlackHoleInfoController : MonoBehaviour
     {
         page += change;
 
-        if (page < 0 || page > 2)
+        if (page < 0 || page > 2) // the size of the array is 3
         {
             SceneManager.LoadScene("Title");
         }
