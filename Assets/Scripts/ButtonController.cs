@@ -23,6 +23,7 @@ public class ButtonController : MonoBehaviour
         page += gotoPage;
 		if (page < 0 || page >= imageArray.Length){
 			SceneManager.LoadScene("Title");
+			return;
 		}
         fieldRenderer.sprite = imageArray[page];
 		displayer.text = instructions[page];
