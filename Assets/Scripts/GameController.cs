@@ -25,6 +25,8 @@ public class GameController : MonoBehaviour
 
     public GameObject endOfLevelButtons;
 
+    public ParticleSystem explosionSystem;
+
     // supposed to be 0-length or null until filled by this //
     public GameObject rocketGObject;                        //
     public GameObject blackHoleGObject;                     //
@@ -190,6 +192,8 @@ public class GameController : MonoBehaviour
         LevelManager levelManager = levelDataObject.GetComponent<LevelManager>();
         levelManager.levelNumber++;
         levelManager.levelNumber %= levelManager.levels.Length;
+        LineRenderer aimLine = rocketController.GetComponent<LineRenderer>();
+        aimLine.enabled = true;
     }
 
     /// <summary>
@@ -263,6 +267,9 @@ public class GameController : MonoBehaviour
         SetCameraFollowMode(CameraMode.FollowRocket);
         rocketController.LandOn(body);
         inputController.displayRings = true;
+        LineRenderer aimLine = rocketController.GetComponent<LineRenderer>();
+        aimLine.enabled = true;
+
 
         if (body.tag == "Planet")
         {
@@ -324,6 +331,9 @@ public class GameController : MonoBehaviour
     public void FlightFailed()
     {
         inPlay = false;
+        explosionSystem.gameObject.transform.position = rocketController.transform.position;
+        explosionSystem.Play();
+        rocketController.transform.position = lastSafeLanding.transform.position;
         rocketController.LandOn(lastSafeLanding);
         SetOxygenMode(OxygenMode.Safe);
         claimedAsteroids.ForEach(asteroid => asteroid.GetComponent<AsteroidController>().LowerFlag());
@@ -341,6 +351,8 @@ public class GameController : MonoBehaviour
         inPlay = true; // starts gravity
         displayStatistics = false;
         inputController.displayRings = false;
+        LineRenderer aimLine = rocketController.GetComponent<LineRenderer>();
+        aimLine.enabled = false;
         launchCounter++;
 
         rocketController.Launch(angle, power);
