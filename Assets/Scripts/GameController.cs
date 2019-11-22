@@ -192,8 +192,7 @@ public class GameController : MonoBehaviour
         LevelManager levelManager = levelDataObject.GetComponent<LevelManager>();
         levelManager.levelNumber++;
         levelManager.levelNumber %= levelManager.levels.Length;
-        LineRenderer aimLine = rocketController.GetComponent<LineRenderer>();
-        aimLine.enabled = true;
+
     }
 
     /// <summary>
@@ -267,8 +266,7 @@ public class GameController : MonoBehaviour
         SetCameraFollowMode(CameraMode.FollowRocket);
         rocketController.LandOn(body);
         inputController.displayRings = true;
-        LineRenderer aimLine = rocketController.GetComponent<LineRenderer>();
-        aimLine.enabled = true;
+       
 
 
         if (body.tag == "Planet")
@@ -351,8 +349,7 @@ public class GameController : MonoBehaviour
         inPlay = true; // starts gravity
         displayStatistics = false;
         inputController.displayRings = false;
-        LineRenderer aimLine = rocketController.GetComponent<LineRenderer>();
-        aimLine.enabled = false;
+        rocketController.aimLine.enabled = false;
         launchCounter++;
 
         rocketController.Launch(angle, power);
@@ -374,7 +371,9 @@ public class GameController : MonoBehaviour
     /// </summary>
     /// <param name="angle">angle in standard degrees</param>
     private void AimRocketAtAngle(float angle)
+
     {
+        rocketController.aimLine.enabled = true;
         rocketController.AimAtAngle(angle);
     }
 
