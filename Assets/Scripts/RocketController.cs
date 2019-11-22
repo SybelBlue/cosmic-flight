@@ -51,9 +51,9 @@ public class RocketController : MonoBehaviour
 
         }
 
-
         if (planetToLandOn != null)
         {
+            GetComponent<TrailRenderer>().Clear();
             if ((planetToLandOn.transform.position - transform.position).sqrMagnitude > 1)
             {
                 transform.position = Vector3.Slerp(transform.position, planetToLandOn.transform.position, 0.2f);
@@ -78,7 +78,7 @@ public class RocketController : MonoBehaviour
     /// </summary>
     private void Rescale()
     {
-        float targetScale = !showActualSize ? 1f : 0.5f;
+        float targetScale = !showActualSize  && false ? 1f : 0.5f;
         float newScale = Mathf.Lerp(transform.localScale.x, targetScale, 0.2f);
         transform.localScale = new Vector3(newScale, newScale);
     }
