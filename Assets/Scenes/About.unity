@@ -628,8 +628,10 @@ MonoBehaviour:
   - A black hole is a massive region of space that does not follow the laws of physics
     that we're used to. It has such strong gravity that it can curve the space around
     it.
-  - The image of the black hole in Cosmic Flight is based on the image produced by
-    Dr. Katie Bouman and the team she led.
+  - The first and only image of a black hole was taken by Dr. Katie Bouman and her
+    team in 2019. This was a major accomplishment since it is impossible to take an
+    optical image of a black hole since they emit no visible light and they distort
+    the space around them.
   page: 0
   displayer: {fileID: 1685837862}
 --- !u!4 &1323576488
