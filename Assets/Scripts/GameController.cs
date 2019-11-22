@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
     public CounterController launchCounter, asteroidCounter, planetCounter;
 
     public GameObject endOfLevelButtons;
+	public ScoreController scoreController;
 
     public ParticleSystem explosionSystem;
 
@@ -320,6 +321,7 @@ public class GameController : MonoBehaviour
     private void GameWon()
     {
         endOfLevelButtons.SetActive(true);
+		scoreController.SetScore(launchCounter.value);
         SetAllowInputs(false);
     }
 
