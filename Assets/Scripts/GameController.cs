@@ -321,7 +321,7 @@ public class GameController : MonoBehaviour
     private void GameWon()
     {
         endOfLevelButtons.SetActive(true);
-		scoreController.SetScore(launchCounter.value);
+		scoreController.SetScore(asteroidCounter.value, launchCounter.value);
         SetAllowInputs(false);
     }
 
