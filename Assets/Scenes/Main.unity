@@ -1617,7 +1617,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 797221463}
-        m_MethodName: OnClick
+        m_MethodName: LoadMainScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1674,7 +1674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61df99dcf7fa94b99ad385c0e78af6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 0}
 --- !u!1 &904116574
 GameObject:
   m_ObjectHideFlags: 0
@@ -7397,7 +7396,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61df99dcf7fa94b99ad385c0e78af6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelData: {fileID: 0}
 --- !u!114 &1613003248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7450,7 +7448,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1613003247}
-        m_MethodName: OnClick
+        m_MethodName: LoadMainScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
