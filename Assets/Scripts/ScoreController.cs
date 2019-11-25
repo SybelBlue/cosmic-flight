@@ -20,7 +20,7 @@ public class ScoreController : MonoBehaviour
 			score = 500 - (launchCounts-1) * 6 + asteroidCounts * 10;
 		}
 		else {
-			score = 500 - (launchCounts-1) * 8 + asteroidCounts * 10;
+			score = 500 - (launchCounts-1) * 8 + asteroidCounts * 12;
 		}
 		if (score >= 485)
 			scoreStr = "Your Score: 3/3";
