@@ -499,7 +499,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &147932786
 RectTransform:
@@ -565,10 +565,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 147932785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c3a7d74fd003bb479168e20eb93c560, type: 3}
+  m_Script: {fileID: 11500000, guid: 93e92e456f7f77040a770fec5edba58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: -10
+  rotateSpeed: -15
 --- !u!1 &168844253
 GameObject:
   m_ObjectHideFlags: 0
@@ -6446,14 +6446,14 @@ GameObject:
   - component: {fileID: 997707445}
   - component: {fileID: 997707447}
   - component: {fileID: 997707446}
-  - component: {fileID: 997707448}
   - component: {fileID: 997707449}
+  - component: {fileID: 997707448}
   m_Layer: 5
   m_Name: Planet Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &997707445
 RectTransform:
@@ -6519,10 +6519,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 997707444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c3a7d74fd003bb479168e20eb93c560, type: 3}
+  m_Script: {fileID: 11500000, guid: 93e92e456f7f77040a770fec5edba58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 10
+  rotateSpeed: 15
 --- !u!114 &997707449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6666,7 +6666,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &1138929556
 RectTransform:
@@ -7158,7 +7158,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &1593733160
 RectTransform:
@@ -8031,14 +8031,14 @@ GameObject:
   - component: {fileID: 2095491232}
   - component: {fileID: 2095491235}
   - component: {fileID: 2095491234}
-  - component: {fileID: 2095491233}
   - component: {fileID: 2095491236}
+  - component: {fileID: 2095491233}
   m_Layer: 5
   m_Name: Asteroid Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &2095491232
 RectTransform:
@@ -8069,10 +8069,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2095491231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c3a7d74fd003bb479168e20eb93c560, type: 3}
+  m_Script: {fileID: 11500000, guid: 93e92e456f7f77040a770fec5edba58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: -10
+  rotateSpeed: 10
 --- !u!114 &2095491234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8236,7 +8236,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!224 &2141272686
 RectTransform:
@@ -8267,10 +8267,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2141272685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c3a7d74fd003bb479168e20eb93c560, type: 3}
+  m_Script: {fileID: 11500000, guid: 93e92e456f7f77040a770fec5edba58f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 10
+  rotateSpeed: -10
 --- !u!114 &2141272688
 MonoBehaviour:
   m_ObjectHideFlags: 0
