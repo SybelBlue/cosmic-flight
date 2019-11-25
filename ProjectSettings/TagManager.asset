@@ -8,6 +8,7 @@ TagManager:
   - Planet
   - Asteroid
   - Level Data
+  - Music and Effects
   layers:
   - Default
   - TransparentFX
