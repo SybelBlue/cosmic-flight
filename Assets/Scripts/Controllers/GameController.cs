@@ -116,7 +116,7 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        LevelManager levelManager = levelDataObject.GetComponent<LevelManager>();
+        LevelManagerController levelManager = levelDataObject.GetComponent<LevelManagerController>();
 
         this.rocketStartingPosition = levelManager.rocketStartingPosition;
         this.planetPosition = levelManager.planetPosition;
@@ -190,7 +190,7 @@ public class GameController : MonoBehaviour
         Debug.Log("called next level");
         if (levelDataObject == null) return;
         Debug.Log("working");
-        LevelManager levelManager = levelDataObject.GetComponent<LevelManager>();
+        LevelManagerController levelManager = levelDataObject.GetComponent<LevelManagerController>();
         levelManager.levelNumber++;
         levelManager.levelNumber %= levelManager.levels.Length;
 

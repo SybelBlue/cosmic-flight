@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class RotateConstantScript : MonoBehaviour
+public class ConstantRotation : MonoBehaviour
 {
 
     // in 100ths of a degree per update
