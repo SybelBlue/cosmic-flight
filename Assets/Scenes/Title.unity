@@ -172,8 +172,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.11672304, g: 0.5266687, b: 0.5754717, a: 0.8235294}
-    m_HighlightedColor: {r: 0.11764707, g: 0.5254902, b: 0.5764706, a: 0.8235294}
+    m_NormalColor: {r: 0.078431375, g: 0.47058824, b: 0.50980395, a: 0.8235294}
+    m_HighlightedColor: {r: 0.078431375, g: 0.47058824, b: 0.50980395, a: 0.8235294}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -820,6 +820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95a59ac92dfdc642955afbbc97b9ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stayUnique: 1
 --- !u!1 &1271158345
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45056072, g: 0.5659493, b: 0.7075472, a: 1}
+  m_Color: {r: 0.39215687, g: 0.54901963, b: 0.7058824, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1224,6 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c95a59ac92dfdc642955afbbc97b9ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stayUnique: 1
 --- !u!1 &2084305077
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,8 +1286,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0.6557567, b: 1, a: 0.8235294}
-    m_HighlightedColor: {r: 0, g: 0.654902, b: 1, a: 0.8235294}
+    m_NormalColor: {r: 0.19607843, g: 0.627451, b: 0.9411765, a: 0.8235294}
+    m_HighlightedColor: {r: 0.19607843, g: 0.627451, b: 0.9411765, a: 0.8235294}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
