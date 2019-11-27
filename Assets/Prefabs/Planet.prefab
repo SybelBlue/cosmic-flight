@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2589574464438091604}
   - component: {fileID: 3333871553608926620}
-  - component: {fileID: 923816427204914036}
   - component: {fileID: 5882934775602926223}
   - component: {fileID: 114836632710770744}
+  - component: {fileID: 8966555626956139364}
   m_Layer: 14
   m_Name: Planet
   m_TagString: Planet
@@ -82,19 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &923816427204914036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4474639943209264299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c3a7d74fd003bb479168e20eb93c560, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateSpeed: -10
 --- !u!58 &5882934775602926223
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -125,3 +112,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 0}
   asteroidToReplace: {fileID: 0}
+--- !u!114 &8966555626956139364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4474639943209264299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e92e456f7f77040a770fec5edba58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateSpeed: 15

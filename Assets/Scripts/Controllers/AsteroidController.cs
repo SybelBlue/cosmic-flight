@@ -8,7 +8,7 @@ public class AsteroidController : MonoBehaviour
     private void Start()
     {
         // sets up a random fast speed with a random parity
-        GetComponent<RotateConstantScript>().rotateSpeed = Random.Range(30f / 3, 40f / 3) * 3 * (Random.value > 0.5f ? -1 : 1);
+        GetComponent<ConstantRotation>().rotateSpeed = Random.Range(30f / 3, 40f / 3) * 3 * (Random.value > 0.5f ? -1 : 1);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

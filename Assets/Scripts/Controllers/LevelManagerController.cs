@@ -4,7 +4,7 @@
 /// A class attachable to a GameObject designed to store all
 /// LevelConfig instances for the whole game
 /// </summary>
-public class LevelManager : MonoBehaviour
+public class LevelManagerController : MonoBehaviour
 {
 
     public LevelConfig[] levels;

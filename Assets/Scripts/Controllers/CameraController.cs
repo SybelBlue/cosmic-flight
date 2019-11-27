@@ -62,7 +62,8 @@ public class CameraController : MonoBehaviour
                 size = neutralSize;
                 break;
             case CameraMode.Wide:
-                focus = gameController.CurrentRocketPosition() / 2;
+                // 3/4s of the way between the black hole (at the origin) and the rocket
+                focus = 3 * gameController.CurrentRocketPosition() / 4.0f;
                 size = wideSize;
                 break;
             default: // in case of future additions to CameraMode
