@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// </summary>
 public enum OxygenMode
 {
-    Safe, Flying, Landed
+    Safe, Flying, Landed, Paused
 }
 
 public class OxygenMeterController : MonoBehaviour
@@ -65,6 +65,8 @@ public class OxygenMeterController : MonoBehaviour
                 return Mathf.Max(0, target - flyBurnRate / 100f);
             case OxygenMode.Safe:
                 return 100;
+            case OxygenMode.Paused:
+                return getOxygenLevel();
             default:
                 Debug.LogError("O2 Mode Not Recognized!");
                 return 100;
@@ -78,5 +80,10 @@ public class OxygenMeterController : MonoBehaviour
     internal void ClaimAsteroid()
     {
         target -= claimCost;
+    }
+
+    private float getOxygenLevel()
+    {
+        return redSlider.value;
     }
 }
