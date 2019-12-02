@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ButtonController : MonoBehaviour
+public class TutorialPageController : MonoBehaviour
 {
 	public Sprite[] imageArray;
 	public int page = 0;
@@ -18,7 +16,7 @@ public class ButtonController : MonoBehaviour
 		displayer.text = instructions[page];
     }
 
-    public void OnClick(int gotoPage)
+    public void ChangePageNumberBy(int gotoPage)
     {
         page += gotoPage;
 		if (page < 0 || page >= imageArray.Length){
