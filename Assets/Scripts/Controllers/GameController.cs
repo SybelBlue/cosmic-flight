@@ -60,6 +60,9 @@ public class GameController : MonoBehaviour
 
     private float canvasWidth, canvasHeight;
 
+    // pause group
+    public GameObject pauseButtons;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +103,7 @@ public class GameController : MonoBehaviour
         }
 
         endOfLevelButtons.SetActive(false);
+        pauseButtons.SetActive(false);
     }
 
     /// <summary>
@@ -171,6 +175,8 @@ public class GameController : MonoBehaviour
     public void Pause()
     {
         Time.timeScale = 0;
+        SetOxygenMode(OxygenMode.Paused);
+        pauseButtons.SetActive(true);
     }
 
     /// <summary>
@@ -178,6 +184,8 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Play()
     {
+        pauseButtons.SetActive(false);
+        SetOxygenMode(OxygenMode.Flying);
         Time.timeScale = timeScale;
     }
 
