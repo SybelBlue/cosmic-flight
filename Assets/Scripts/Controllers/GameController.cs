@@ -61,7 +61,8 @@ public class GameController : MonoBehaviour
     private float canvasWidth, canvasHeight;
 
     // pause group
-    public GameObject pauseButtons;
+    public GameObject pauseMenuButtons;
+    public GameObject pauseButton;
 
     // Start is called before the first frame update
     void Start()
@@ -103,7 +104,8 @@ public class GameController : MonoBehaviour
         }
 
         endOfLevelButtons.SetActive(false);
-        pauseButtons.SetActive(false);
+        pauseMenuButtons.SetActive(false);
+        pauseButton.SetActive(true);
     }
 
     /// <summary>
@@ -176,7 +178,8 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 0;
         SetOxygenMode(OxygenMode.Paused);
-        pauseButtons.SetActive(true);
+        pauseMenuButtons.SetActive(true);
+        pauseButton.SetActive(false);
     }
 
     /// <summary>
@@ -184,7 +187,8 @@ public class GameController : MonoBehaviour
     /// </summary>
     public void Play()
     {
-        pauseButtons.SetActive(false);
+        pauseMenuButtons.SetActive(false);
+        pauseButton.SetActive(true);
         SetOxygenMode(OxygenMode.Flying);
         Time.timeScale = timeScale;
     }
@@ -329,6 +333,7 @@ public class GameController : MonoBehaviour
     private void GameWon()
     {
         endOfLevelButtons.SetActive(true);
+        pauseButton.SetActive(false);
 		scoreController.SetScore(asteroidCounter.value, launchCounter.value);
         SetAllowInputs(false);
     }
