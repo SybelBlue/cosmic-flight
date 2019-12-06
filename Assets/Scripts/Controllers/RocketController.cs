@@ -8,7 +8,7 @@ public class RocketController : MonoBehaviour
     public float defaultAngle;
 
     public int framesPerFireDrop;
-    public int framesSinceLaunch;
+    private int framesSinceLaunch;
 
     public Rigidbody2D rigidbody;
 
@@ -36,7 +36,7 @@ public class RocketController : MonoBehaviour
     void Update()
     {
         Rescale();
-
+        framesSinceLaunch++;
         switch (framesSinceLaunch / framesPerFireDrop)
         {
             case 3:

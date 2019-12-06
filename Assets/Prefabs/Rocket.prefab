@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 51522755031347749}
   m_Layer: 15
   m_Name: FireBlue_crop
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,8 +65,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1554268507
+  m_SortingLayer: 5
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 379b9c400f3b4b34d9965eb0c0766d27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 3994194818619151674}
   m_Layer: 15
   m_Name: FireOrangeCrop
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,8 +144,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1554268507
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 31b297b3aa9f2bb46a9e4835ad317347, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 2021798544607759431}
   m_Layer: 15
   m_Name: FireRedCrop1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,8 +223,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1554268507
+  m_SortingLayer: 5
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1627aa0b256972448876333bb1a6e49c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -333,8 +333,7 @@ MonoBehaviour:
   - {fileID: 2348613981118428767}
   - {fileID: 2557196339162111745}
   defaultAngle: 90
-  framesPerFireDrop: 100
-  framesSinceLaunch: 0
+  framesPerFireDrop: 50
   rigidbody: {fileID: 0}
   aimLine: {fileID: 0}
   velocityPerPower: 10
