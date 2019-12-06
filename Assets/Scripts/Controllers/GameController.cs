@@ -457,7 +457,7 @@ public class GameController : MonoBehaviour
         {
             SetCameraFollowMode(CameraMode.Wide);
             AimRocketAtAngle(input.gestureZAngleOffset);
-            statsController.DisplayShotStatistics(input, canvasWidth, canvasHeight);
+            // statsController.DisplayShotStatistics(input, canvasWidth, canvasHeight);
         }
     }
 
