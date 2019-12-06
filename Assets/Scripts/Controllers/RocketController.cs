@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
     public GameObject planetToLandOn, planetLandedOn;
     public GameObject sprite;
-    public GameObject[] fireObjects;
+    public RocketFireController[] fireControllers;
     public float defaultAngle;
 
     public int framesPerFireDrop;
@@ -29,29 +30,32 @@ public class RocketController : MonoBehaviour
 
     internal void ResetRotation()
     {
-        AimAtAngle(0);
+        AimWith(0, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         Rescale();
-        framesSinceLaunch++;
-        switch (framesSinceLaunch / framesPerFireDrop)
-        {
-            case 3:
-                fireObjects[2].SetActive(false);
-                fireObjects[1].SetActive(false);
-                fireObjects[0].SetActive(false);
-                break;
-            case 2:
-                fireObjects[1].SetActive(false);
-                fireObjects[0].SetActive(false);
-                break;
-            case 1:
-                fireObjects[0].SetActive(false);
-                break;
 
+        if (!fireControllers[0].aiming)
+        {
+            framesSinceLaunch++;
+            switch (framesSinceLaunch / framesPerFireDrop)
+            {
+                case 3:
+                    fireControllers[0].gameObject.SetActive(false);
+                    fireControllers[1].gameObject.SetActive(false);
+                    fireControllers[2].gameObject.SetActive(false);
+                    break;
+                case 2:
+                    fireControllers[1].gameObject.SetActive(false);
+                    fireControllers[2].gameObject.SetActive(false);
+                    break;
+                case 1:
+                    fireControllers[2].gameObject.SetActive(false);
+                    break;
+            }
         }
 
         if (planetToLandOn != null)
@@ -118,9 +122,10 @@ public class RocketController : MonoBehaviour
     /// Gets the angle relative to the start position and aims there
     /// </summary>
     /// <param name="angle">angle in standard degrees, with 0 at +x</param>
-    internal void AimAtAngle(float angle)
+    internal void AimWith(float angle, int power)
     {
         AimAtAbsoluteAngle(GetRelativeAngle(angle));
+        SetPower(power, true);
     }
 
     /// <summary>
@@ -144,7 +149,7 @@ public class RocketController : MonoBehaviour
     /// <param name="power">power coefficient (positive proportional)</param>
     internal void Launch(float angle, int power)
     {
-        AimAtAngle(angle);
+        AimAtAbsoluteAngle(GetRelativeAngle(angle));
         float adjustedAngle = Mathf.Deg2Rad * GetRelativeAngle(angle);
         // !!!!!!!!!!!!!!!!!!!!!!! MATHF TAKES RADIANS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         var newVelocity = power * velocityPerPower * new Vector2(Mathf.Cos(adjustedAngle), Mathf.Sin(adjustedAngle));
@@ -157,9 +162,15 @@ public class RocketController : MonoBehaviour
 
         framesSinceLaunch = 0;
 
-        for (int i = 0; i < power; i++)
+        SetPower(power, false);
+    }
+
+    private void SetPower(int power, bool aiming)
+    {
+        for (int i = 0; i < fireControllers.Length; i++)
         {
-            fireObjects[i].SetActive(true);
+            fireControllers[i].SetAiming(aiming);
+            fireControllers[i].gameObject.SetActive(i < power);
         }
     }
 
@@ -193,5 +204,14 @@ public class RocketController : MonoBehaviour
         // make a child of the planet so it will rotate with it
         transform.parent = planet.transform;
         planetToLandOn = planet;
+
+        SetPower(0, false);
+    }
+
+    internal void CancelAiming()
+    {
+        ResetRotation();
+        SetPower(0, false);
+        aimLine.enabled = false;
     }
 }
