@@ -180,6 +180,7 @@ public class GameController : MonoBehaviour
         SetOxygenMode(OxygenMode.Paused);
         pauseMenuButtons.SetActive(true);
         pauseButton.SetActive(false);
+        SetAllowInputs(false);
     }
 
     /// <summary>
@@ -191,6 +192,7 @@ public class GameController : MonoBehaviour
         pauseButton.SetActive(true);
         SetOxygenMode(OxygenMode.Flying);
         Time.timeScale = timeScale;
+        SetAllowInputs(true);
     }
 
     /// <summary>
