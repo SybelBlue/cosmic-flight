@@ -212,5 +212,6 @@ public class RocketController : MonoBehaviour
     {
         ResetRotation();
         SetPower(0, false);
+        aimLine.enabled = false;
     }
 }

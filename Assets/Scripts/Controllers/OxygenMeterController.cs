@@ -33,7 +33,7 @@ public class OxygenMeterController : MonoBehaviour
             gameController.OutOfOxygen();
         }
 
-        label.text = string.Format("O2: {0}%", Mathf.RoundToInt(mainSlider.value));
+        // label.text = string.Format("O2: {0}%", Mathf.RoundToInt(mainSlider.value));
         label.color = Color.Lerp(label.color, GetLabelColor(mainSlider.value / mainSlider.maxValue), 0.4f);
     }
 
