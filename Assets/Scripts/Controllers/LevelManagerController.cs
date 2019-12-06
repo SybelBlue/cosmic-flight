@@ -37,6 +37,11 @@ public class LevelManagerController : MonoBehaviour
         }
     }
 
+    public int getLevelNumber()
+    {
+        return levelNumber;
+    }
+
     /// <summary>
     /// Propigates important properties down, auto-labels them with
     /// their level number, and then requests each to validate its own data.
