@@ -387,11 +387,11 @@ public class GameController : MonoBehaviour
     /// Points the rocket sprite at angle
     /// </summary>
     /// <param name="angle">angle in standard degrees</param>
-    private void AimRocketAtAngle(float angle)
+    private void AimRocketWith(float angle, int power)
 
     {
         rocketController.aimLine.enabled = true;
-        rocketController.AimAtAngle(angle);
+        rocketController.AimWith(angle, power);
     }
 
     /// <summary>
@@ -399,7 +399,7 @@ public class GameController : MonoBehaviour
     /// </summary>
     private void ShotCancelled()
     {
-        rocketController.ResetRotation();
+        rocketController.CancelAiming();
         SetCameraFollowMode(CameraMode.FollowRocket);
     }
 
@@ -456,7 +456,7 @@ public class GameController : MonoBehaviour
         else
         {
             SetCameraFollowMode(CameraMode.Wide);
-            AimRocketAtAngle(input.gestureZAngleOffset);
+            AimRocketWith(input.gestureZAngleOffset, input.gesturePower);
             // statsController.DisplayShotStatistics(input, canvasWidth, canvasHeight);
         }
     }
