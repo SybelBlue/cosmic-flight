@@ -1367,7 +1367,7 @@ MonoBehaviour:
   mode: 0
   neutralPosition: {x: 0, y: 0, z: -10}
   neutralSize: 140
-  followSize: 80
+  followSize: 110
   wideSize: 180
   offsetFromCenter: {x: 0, y: 0, z: 0}
   mapX: 480
