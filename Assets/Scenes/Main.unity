@@ -2125,7 +2125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &904116575
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7256,7 +7256,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1318807664
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9241,7 +9241,7 @@ MonoBehaviour:
   rings: {fileID: 1657838738}
   displayRings: 0
   acceptingInputs: 0
-  unitsYPerPower: 100
+  unitsYPerPower: 140
   degreesPerUnitX: 1
   peekSensitivity: 10
   cam: {fileID: 519420031}
