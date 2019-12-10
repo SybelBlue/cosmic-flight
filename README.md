@@ -12,6 +12,8 @@ To get cosmic-flight up and running
    - Configure Github for Unity with the proper user info
  - Start a new Unity Project with the Github for Unity package
  - Fork and/or clone [cosmic-flight](https://github.com/SybelBlue/cosmic-flight) using Github for Unity
+ - Install the build tools for Android/iOS throught the Build Settings menu
+ - Change Game view to have the appropriate resolution 
  - Experiment!
 
 ## Game
