@@ -1,6 +1,6 @@
 # cosmic-flight
 
-A physics-based puzzle game
+Play as a rocket in a physics-based puzzle game!
 
 ## Setup
 
