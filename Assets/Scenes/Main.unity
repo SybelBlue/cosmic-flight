@@ -2163,8 +2163,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c3421acad00cf4e7e9c1e8b1ebf86d2b, type: 2}
-  - {fileID: 2100000, guid: c3421acad00cf4e7e9c1e8b1ebf86d2b, type: 2}
+  - {fileID: 2100000, guid: 31870a82c77804e109ebdc976848b4df, type: 2}
+  - {fileID: 2100000, guid: 31870a82c77804e109ebdc976848b4df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8696,13 +8696,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927979378}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1927979380
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -8740,7 +8740,7 @@ SpriteRenderer:
   m_SortingLayerID: 408722831
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c5ca98d189b0a934799d41bf800d1417, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d28e264072792c4190eeef2565041fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
