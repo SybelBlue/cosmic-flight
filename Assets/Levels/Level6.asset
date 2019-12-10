@@ -12,9 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f3452713e06e4645aaaca0fbab6ddbe, type: 3}
   m_Name: Level6
   m_EditorClassIdentifier: 
-  levelNumber: 0
-  rocketStartingPosition: {x: 0, y: 0, z: 0}
-  planetPosition: {x: 0, y: 0, z: 0}
-  asteroidStartingPostions: []
-  warningThreshold: 0
+  levelNumber: 6
+  rocketStartingPosition: {x: -20, y: -50, z: 0}
+  planetPosition: {x: 20, y: 50, z: 0}
+  asteroidStartingPostions:
+  - {x: 20, y: -40, z: 0}
+  - {x: -20, y: 50, z: 0}
+  - {x: -30, y: 40, z: 0}
+  warningThreshold: 60
   comments: 
