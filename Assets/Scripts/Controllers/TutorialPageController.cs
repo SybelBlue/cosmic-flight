@@ -4,26 +4,33 @@ using UnityEngine.SceneManagement;
 
 public class TutorialPageController : MonoBehaviour
 {
-	public Sprite[] imageArray;
+	//public Sprite[] imageArray;
+	public GameObject[] tutorialArray;
 	public int page = 0;
-    public SpriteRenderer fieldRenderer;
-	public string[] instructions;
-    public Text displayer; 
+    //public SpriteRenderer fieldRenderer;
+	//public string[] instructions;
+    //public Text displayer; 
 
     public void Start()
     {
-        fieldRenderer.sprite = imageArray[page];
-		displayer.text = instructions[page];
+        //fieldRenderer.sprite = imageArray[page];
+		tutorialArray[page].SetActive(true);
+		//displayer.text = instructions[page];
     }
 
     public void ChangePageNumberBy(int gotoPage)
     {
         page += gotoPage;
-		if (page < 0 || page >= imageArray.Length){
+		Debug.Log(page);
+		if (page < 0 || page >= tutorialArray.Length){
 			SceneManager.LoadScene("Title");
 			return;
 		}
-        fieldRenderer.sprite = imageArray[page];
-		displayer.text = instructions[page];
+        //fieldRenderer.sprite = imageArray[page];
+		//tutorialArray[page].SetActive(true);
+		for (int i = 0; i < tutorialArray.Length; i++) {
+			tutorialArray[i].SetActive(i == page);
+		}
+		//displayer.text = instructions[page];
     }
 }
