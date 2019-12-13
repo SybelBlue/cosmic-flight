@@ -9,11 +9,20 @@ public class LevelManagerController : MonoBehaviour
 
     public LevelConfig[] levels;
 
+    /// <summary>
+    /// The current level number
+    /// </summary>
     public int levelNumber;
 
+    /// <summary>
+    /// The distance at which level configs will warn in the inspector
+    /// if the rocket, the black hole, or any of the planets are too close
+    /// </summary>
     public float warningThreshold;
 
-    // computed properties, but getters nonetheless, all relative to the selected levelNumber
+    /// <summary>
+    /// The current level's rocket starting position (computed)
+    /// </summary>
     public Vector3 rocketStartingPosition
     {
         get
@@ -21,6 +30,10 @@ public class LevelManagerController : MonoBehaviour
             return levels[levelNumber].rocketStartingPosition;
         }
     }
+
+    /// <summary>
+    /// The current level's first planet position (computed)
+    /// </summary>
     public Vector3 planetPosition
     {
         get
@@ -29,17 +42,15 @@ public class LevelManagerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// The current level's asteroid starting positions (computed)
+    /// </summary>
     public Vector3[] asteroidStartingPostions
     {
         get
         {
             return levels[levelNumber].asteroidStartingPostions;
         }
-    }
-
-    public int getLevelNumber()
-    {
-        return levelNumber;
     }
 
     /// <summary>

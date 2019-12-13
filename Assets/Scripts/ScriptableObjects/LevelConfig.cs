@@ -15,6 +15,10 @@ public class LevelConfig : ScriptableObject
     public Vector3 rocketStartingPosition, planetPosition;
     public Vector3[] asteroidStartingPostions;
 
+    /// <summary>
+    /// The distance at which this object will warn in the inspector
+    /// if the rocket, the black hole, or any of the planets are too close
+    /// </summary>
     public float warningThreshold;
 
 	[TextArea]

@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// A class that defines the unique behaviors of an asteroid prefab's flag
+/// </summary>
 public class FlagController : MonoBehaviour
 {
 
+    /// <summary>
+    /// True when the flag is raising or raised, false otherwise
+    /// </summary>
     public bool isRaised;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Sets up this object to be hidden and small
+    /// </summary>
     void Start()
     {
         isRaised = false;
@@ -13,7 +21,10 @@ public class FlagController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Grows the flag's localScale, capped at 1, when isRaised is true,
+    /// shrinks it and hides it otherwise
+    /// </summary>
     void Update()
     {
         if (isRaised)
@@ -34,6 +45,10 @@ public class FlagController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets up the flag to be raised, fires the raise animation
+    /// </summary>
+    /// <param name="raised"></param>
     internal void SetRaised(bool raised)
     {
         isRaised = raised;

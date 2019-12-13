@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A class that coordinates the interactions of all the independent pieces of the game
+/// </summary>
 public class GameController : MonoBehaviour
 {
     // all for defaults and testing: level data replaces this //
@@ -37,7 +40,7 @@ public class GameController : MonoBehaviour
 
     public Canvas screenOverlayCanvas;
 
-    // 1 is normal speed, 0.5 is half speed. I love Unity.
+    // 1 is normal speed, 0.5 is half speed, etc. I love Unity.
     public float timeScale;
 
     private GameObject levelDataObject;
@@ -58,13 +61,16 @@ public class GameController : MonoBehaviour
     /// </summary>
     public bool displayStatistics;
 
-    private float canvasWidth, canvasHeight;
-
-    // pause group
+    /// <summary>
+    /// The parent of the pause menu buttons that pops 
+    /// up when the pauseButton is clicked
+    /// </summary>
     public GameObject pauseMenuButtons;
+    /// <summary>
+    /// The in-game pause button
+    /// </summary>
     public GameObject pauseButton;
 
-    // Start is called before the first frame update
     void Start()
     {
         LoadLevelData();
@@ -80,9 +86,6 @@ public class GameController : MonoBehaviour
 
         SetCameraFollowMode(CameraMode.Neutral);
         SetOxygenMode(OxygenMode.Safe);
-
-        canvasWidth = screenOverlayCanvas.GetComponent<RectTransform>().rect.width;
-        canvasHeight = screenOverlayCanvas.GetComponent<RectTransform>().rect.height;
 
         // sets a callback on inputController, works like magic.
         inputController.whenUpdated += GestureUpdated;
