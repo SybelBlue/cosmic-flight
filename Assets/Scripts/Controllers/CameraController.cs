@@ -8,25 +8,58 @@ public enum CameraMode
     Neutral, FollowRocket, StayPut, Wide
 }
 
+/// <summary>
+/// A class that defines the unique behaviors of the main camera in the main scene
+/// </summary>
 public class CameraController : MonoBehaviour
 {
-
+    /// <summary>
+    /// A reference to the GameController on this level
+    /// </summary>
     public GameController gameController;
+
+    /// <summary>
+    /// The mode the camera should be in
+    /// </summary>
     public CameraMode mode;
 
+    /// <summary>
+    /// The position the camera should rest in during neutral mode
+    /// </summary>
     public Vector3 neutralPosition;
+    /// <summary>
+    /// The frame size of the camera during neutral mode
+    /// </summary>
     public float neutralSize;
+    /// <summary>
+    /// The frame size of the camera during follow mode
+    /// </summary>
     public float followSize;
+    /// <summary>
+    /// The frame size of the camera during wide mode
+    /// </summary>
     public float wideSize;
 
+    /// <summary>
+    /// The offset of the camera from the focus point in the frame
+    /// </summary>
     public Vector3 offsetFromCenter;
 
+    /// <summary>
+    /// Constants to keep camera in-bounds provided by answers found here
+    /// https://answers.unity.com/questions/501893/calculating-2d-camera-bounds.html
+    /// </summary>
     public float mapX, mapY;
-    
     private float minX, maxX, minY, maxY;
 
+    /// <summary>
+    /// The camera script on this object
+    /// </summary>
     private Camera camera;
 
+    /// <summary>
+    /// Sets up the basic constants for the camera
+    /// </summary>
     private void Start()
     {
         mode = CameraMode.Neutral;
@@ -44,6 +77,9 @@ public class CameraController : MonoBehaviour
         maxY = mapY / 2.0f - vertExtent;
     }
 
+    /// <summary>
+    /// Adjusts the camera position depending on the mode
+    /// </summary>
     private void Update()
     {
         Vector3 focus;
@@ -96,15 +132,5 @@ public class CameraController : MonoBehaviour
         if ((transform.position - position).sqrMagnitude > 0.2f) return;
 
         transform.position = position;
-    }
-
-    internal bool InMapBounds(Vector3 position)
-    {
-        // Calculations assume map is position at the origin
-        var minX = -mapX / 2.0f;
-        var maxX = mapX / 2.0f;
-        var minY = -mapY / 2.0f;
-        var maxY = mapY / 2.0f;
-        return minX <= position.x && position.x <= maxX && minY <= position.y && position.y <= maxY;
     }
 }

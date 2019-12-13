@@ -1,16 +1,33 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// A class that defines the behavior of the aiming stats display
+/// (Depreciated)
+/// </summary>
 public class StatsController : MonoBehaviour
 {
+    /// <summary>
+    /// The offset from the screen location of user touch
+    /// </summary>
     public Vector3 touchOffset;
+
+    /// <summary>
+    /// The text object to display stats on
+    /// </summary>
     public Text statsText;
 
+    /// <summary>
+    /// Resets this object
+    /// </summary>
     void Start()
     {
         ResetFields(); 
     }
 
+    /// <summary>
+    /// Sets the fields to their inspector state
+    /// </summary>
     public void ResetFields()
     {
         gameObject.SetActive(false);
