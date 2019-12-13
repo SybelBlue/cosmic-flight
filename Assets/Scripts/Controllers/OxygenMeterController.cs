@@ -14,9 +14,20 @@ public class OxygenMeterController : MonoBehaviour
     public GameController gameController;
     public Text label;
     public OxygenMode mode;
+    public GameObject flashingPanel;
+    public Vector3 jitterValue;
     public float flyBurnRate, asteroidLandedBurnRate, claimCost, target, decreasePerTick;
+    public int framesPerFlash;
     public Color highO2Color, mediumO2Color, lowO2Color;
     public Slider mainSlider, redSlider;
+
+    private float framesSinceToggle;
+    private Vector3 startingPosition;
+
+    private void Start()
+    {
+        startingPosition = transform.position;
+    }
 
     void Update()
     {
@@ -33,6 +44,29 @@ public class OxygenMeterController : MonoBehaviour
 
         // label.text = string.Format("O2: {0}%", Mathf.RoundToInt(mainSlider.value));
         label.color = Color.Lerp(label.color, GetLabelColor(mainSlider.value / mainSlider.maxValue), 0.4f);
+
+        if (target <= 30 && mode != OxygenMode.Safe)
+        {
+            framesSinceToggle++;
+            
+            if (framesSinceToggle % 2 == 0)
+            {
+                jitterValue = Random.insideUnitCircle * (target <= 15 ? 5 : 3);
+                transform.position = startingPosition + jitterValue;
+            }
+
+            if (target <= 15 && framesSinceToggle >= framesPerFlash)
+            {
+                flashingPanel.SetActive(!flashingPanel.activeSelf);
+                framesSinceToggle = 0;
+            }
+        } 
+        else
+        {
+            flashingPanel.SetActive(false);
+            transform.position = startingPosition;
+            framesSinceToggle = 0;
+        }
     }
 
     /// <summary>
