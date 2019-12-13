@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// A class that defines the behaviors of the buttons on the about page
+/// </summary>
 public class BlackHoleInfoController : MonoBehaviour
 {
     public string[] aboutPages;
