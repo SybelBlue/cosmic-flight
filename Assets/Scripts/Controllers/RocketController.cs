@@ -1,25 +1,76 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// A class that defines the unique behaviors of the rocket prefab
+/// </summary>
 public class RocketController : MonoBehaviour
 {
-    public GameObject planetToLandOn, planetLandedOn;
+    /// <summary>
+    /// The object this rocket will attempt to land on
+    /// </summary>
+    public GameObject planetToLandOn;
+
+    /// <summary>
+    /// The object this rocket landed on
+    /// </summary>
+    public GameObject planetLandedOn;
+
+    /// <summary>
+    /// The sprite of this object
+    /// </summary>
     public GameObject sprite;
+
+    /// <summary>
+    /// The RocketFireControllers of fire items attached to this
+    /// </summary>
     public RocketFireController[] fireControllers;
+
+    /// <summary>
+    /// The default angle of the rocket before it's aimed
+    /// </summary>
     public float defaultAngle;
 
+    /// <summary>
+    /// The number of frames before a level of fire is hidden
+    /// during flight
+    /// </summary>
     public int framesPerFireDrop;
+
+    /// <summary>
+    /// The number of frames since the rocket was launched
+    /// </summary>
     private int framesSinceLaunch;
 
+    /// <summary>
+    /// The rigidbody attached this gameObject
+    /// </summary>
     public Rigidbody2D rigidbody;
 
+    /// <summary>
+    /// The aiming line of this rocket
+    /// </summary>
     public LineRenderer aimLine;
 
+    /// <summary>
+    /// The velocity to add for each level of power input
+    /// by a user
+    /// </summary>
     public float velocityPerPower;
+
+    /// <summary>
+    /// When true, this rocket is scaled to normal size,
+    /// when false, this rocket is shrunk to half size
+    /// </summary>
     public bool showActualSize;
     
+    /// <summary>
+    /// Returns wether or not this rocket is safely landed (computed)
+    /// </summary>
     internal bool isSafe { get { return planetToLandOn != null || planetLandedOn != null;  } }
 
+    /// <summary>
+    /// Sets up this rocket to be animated
+    /// </summary>
     private void Start()
     {
         rigidbody = transform.GetComponent<Rigidbody2D>();
@@ -28,12 +79,17 @@ public class RocketController : MonoBehaviour
         aimLine = GetComponent<LineRenderer>();
     }
 
+    /// <summary>
+    /// Sets the rotation and power to 0
+    /// </summary>
     internal void ResetRotation()
     {
         AimWith(0, 0);
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Runs all animations on this rocket
+    /// </summary>
     void Update()
     {
         Rescale();
@@ -165,6 +221,12 @@ public class RocketController : MonoBehaviour
         SetPower(power, false);
     }
 
+    /// <summary>
+    /// Sets the power and aiming mode of this rocket
+    /// so that it will display the trailing fire properly
+    /// </summary>
+    /// <param name="power">the current power level</param>
+    /// <param name="aiming">true when aiming, false otherwise</param>
     private void SetPower(int power, bool aiming)
     {
         for (int i = 0; i < fireControllers.Length; i++)
@@ -208,6 +270,9 @@ public class RocketController : MonoBehaviour
         SetPower(0, false);
     }
 
+    /// <summary>
+    /// Ends aiming mode
+    /// </summary>
     internal void CancelAiming()
     {
         ResetRotation();
