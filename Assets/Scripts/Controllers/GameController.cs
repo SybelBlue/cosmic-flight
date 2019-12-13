@@ -354,6 +354,7 @@ public class GameController : MonoBehaviour
         claimedAsteroids.ForEach(asteroid => asteroid.GetComponent<AsteroidController>().LowerFlag());
         claimedAsteroids.Clear();
         inputController.displayRings = true;
+        SetCameraFollowMode(CameraMode.Wide);
     }
 
     /// <summary>
