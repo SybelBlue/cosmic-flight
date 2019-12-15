@@ -23,8 +23,7 @@ A simple space game that gets harder as you go. We challenge you to terraform al
  - Peek around space by dragging when the rocket is flying!
 
 ## Known Bugs
- - Level buttons don't load the levels they say they do
- - Rocket occasionally launches itself after death
+  We now have an up-to-date issues section!
 
 ## TODO
  - Add mute option for audio and launch haptics
