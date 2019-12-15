@@ -13,6 +13,7 @@ public class ScoreController : MonoBehaviour
 	
 	/// <summary>
     /// calculates the score based on number of flights and asteroid counts
+	/// calculation varies based on number of asteroids in the level
     /// </summary>
     internal void SetScore(int asteroidCounts, int launchCounts)
     {
