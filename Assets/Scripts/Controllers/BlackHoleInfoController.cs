@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class BlackHoleInfoController : MonoBehaviour
 {
+    [TextArea]
     public string[] aboutPages;
     public int page;
     public Text displayer; 
@@ -26,7 +27,7 @@ public class BlackHoleInfoController : MonoBehaviour
     {
         page += change;
 
-        if (page < 0 || page > 1) // the size of the array is 2
+        if (page < 0 || page > 2) // the size of the array is 3
         {
             SceneManager.LoadScene("Title");
         }
