@@ -30,3 +30,4 @@ A simple space game that gets harder as you go. We challenge you to terraform al
 ## TODO
  - Add mute option for audio and launch haptics
  - Don't explode on purposeful relaunch?
+ - Save Level data so that you do not restart levels any time you close/reopen the app
