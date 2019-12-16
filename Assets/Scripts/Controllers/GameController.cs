@@ -106,6 +106,7 @@ public class GameController : MonoBehaviour
         endOfLevelButtons.SetActive(false);
         pauseMenuButtons.SetActive(false);
         pauseButton.SetActive(true);
+
     }
 
     /// <summary>
