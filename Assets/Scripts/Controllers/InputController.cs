@@ -324,30 +324,22 @@ public class InputController : MonoBehaviour
     /// <param name="position">the newest positon of a gesture</param>
     private void UpdateGestureProperties(Vector3 position)
     {
-
         int oldPower = state.gesturePower;
 
         state.gestureRocketDelta = cam.WorldToScreenPoint(rocketController.transform.position) - position;
-
-
-        Debug.DrawLine(cam.WorldToScreenPoint(rocketController.transform.position), position, Color.cyan);
-
-      
-
         state.gesturePower = (int)Mathf.Clamp(state.gestureRocketDelta.magnitude/unitsYPerPower,0,3);
 
-       // state.gesturePower = (int)Mathf.Clamp(state.gestureDelta.y / unitsYPerPower + 2, 0, 3);
+        Debug.DrawLine(cam.WorldToScreenPoint(rocketController.transform.position), position, Color.cyan);
 
         if (oldPower != state.gesturePower && displayRings)
         {
             Handheld.Vibrate();
         }
-       float inverseTan = Mathf.Atan2(state.gestureRocketDelta.x, state.gestureRocketDelta.y);
 
-       state.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * inverseTan * - 180 / Mathf.PI, -360, 360);
-      // state.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * state.gestureDelta.x * -1, -360, 360);
+        float inverseTan = Mathf.Atan2(state.gestureRocketDelta.x, state.gestureRocketDelta.y);
 
-       state.cameraOffset = state.gestureDelta * Mathf.Clamp(peekSensitivity / 100, 0.01f, 2.5f);
+        state.gestureZAngleOffset = Mathf.Clamp(degreesPerUnitX * inverseTan * - 180 / Mathf.PI, -360, 360);
+        state.cameraOffset = state.gestureDelta * Mathf.Clamp(peekSensitivity / 100, 0.01f, 2.5f);
 
         whenUpdated(state.copy());
     }

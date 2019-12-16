@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class BlackHoleInfoController : MonoBehaviour
 {
+    [TextArea]
     public string[] aboutPages;
     public int page;
     public Text displayer; 

@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// A class that calculates the score at the end of each level based on
+/// number of flights, and asteroids terraformed
+/// </summary>
 public class ScoreController : MonoBehaviour
 {
 	public string scoreStr;
 	public int score;
 	public Text displayer;
 	
-
+	/// <summary>
+    /// calculates the score based on number of flights and asteroid counts
+	/// calculation varies based on number of asteroids in the level
+    /// </summary>
     internal void SetScore(int asteroidCounts, int launchCounts)
     {
 		if (asteroidCounts == 0) {

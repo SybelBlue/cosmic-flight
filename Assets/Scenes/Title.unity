@@ -1060,7 +1060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
+  m_AnchoredPosition: {x: 0, y: -200}
   m_SizeDelta: {x: -40, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1271158347
@@ -1086,7 +1086,7 @@ MonoBehaviour:
     m_FontSize: 27
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 2
+    m_MinSize: 0
     m_MaxSize: 200
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1327,6 +1327,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efb9269bad3c4ce438e025944353a2fa, type: 2}
   - {fileID: 11400000, guid: 629e2fcd831ce1646b1f818db21ade3b, type: 2}
   - {fileID: 11400000, guid: a4bb2d2c3bc507949b0d45abea8b1c93, type: 2}
+  - {fileID: 11400000, guid: 59ab018d72f407f43ae6aa6e1e48bbea, type: 2}
+  - {fileID: 11400000, guid: f117f56208dcce7409e2bd322ffec567, type: 2}
+  - {fileID: 11400000, guid: b4b86b84b2fd5984b8c5b6ca4b3596e1, type: 2}
+  - {fileID: 11400000, guid: 13aaf9e4a7144c5489fab060ea5aa3b1, type: 2}
   levelNumber: 0
   warningThreshold: 60
 --- !u!4 &1949915430
@@ -1456,7 +1460,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Tutorial
+          m_StringArgument: LevelSelect
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2055649781
