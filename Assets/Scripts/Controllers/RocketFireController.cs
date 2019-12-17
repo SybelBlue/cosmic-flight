@@ -30,6 +30,10 @@ public class RocketFireController : MonoBehaviour
     /// <param name="aiming">true when aiming, false otherwise</param>
     internal void SetAiming(bool aiming)
     {
+        if (renderer == null)
+        {
+            Start();
+        }
         this.aiming = aiming;
         var oldColor = renderer.color;
         oldColor.a = aiming ? 0.5f : 1.0f;
